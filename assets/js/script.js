@@ -1,20 +1,64 @@
-/*=============================
-DISPLAY FINANCIAL NEWS - NAFIS
-=============================*/
+// Dependencies
+//form input
+var formEl = $("#form");
+//input element
+var stockInputEl = $("#search");
 
-var stockTicker = 'AAPL';
-var APIKey = '4e48677e67d7cfd40210605712bdb9a0';
+// DATA
 
-var newsUrl = `https://financialmodelingprep.com/api/v3/stock_news?tickers=${stockTicker}&limit=5&apikey=${APIKey}`;
+var finModPrepBaseURL = "https://financialmodelingprep.com";
 
-fetch(newsUrl)
-    .then(function (response) {
-    return response.json();
-})
-    .then(function (data) {
-    console.log('Fetch Response \n-------------');
-    console.log(data);
+// var stock = "Apple";
+// var stocksymbol = "AAPL";
+
+// FUNCTIONS
+
+$(function () {
+  var availableTags = [
+    "AAPL",
+    "MSFT",
+    "GOOG",
+    "GOOGL",
+    "AMZN",
+    "FB",
+    "TSLA",
+    "NVDA",
+    "PYPL",
+    "ASML",
+    "ADBE",
+    "CMCSA",
+    "CSCO",
+    "NFLX",
+    "PEP",
+    "INTC",
+    "AVGO",
+    "COST",
+    "TMUS",
+    "TXN",
+  ];
+  $("#search").autocomplete({
+    source: availableTags,
+  });
 });
 
-function createNewsCard () {
+function addFav(event) {
+  event.preventDefault();
+
+  var stckSymb = stockInputEl.val();
+  var endPoint = `/api/v3/profile/${stckSymb}?apikey=70d6b158d23c070db6658a8cac0da9a9`;
+  finModPrepURL = finModPrepBaseURL + endPoint;
+  var stckName = "";
+  fetch(finModPrepURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      stckName = data.companyName;
+      console.log(stckName);
+    });
+  localStorage.setItem("stckSymb");
 }
+
+// USER INTERACTIONS
+
+formEl.on("submit", addFav);
