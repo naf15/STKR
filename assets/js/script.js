@@ -53,10 +53,10 @@ function addFav(event) {
       return response.json();
     })
     .then(function (data) {
-      stckName = data.companyName;
+      stckName = data[0].companyName;
+      localStorage.setItem(stckSymb, stckName);
       console.log(stckName);
     });
-  localStorage.setItem("stckSymb");
 }
 
 // USER INTERACTIONS
