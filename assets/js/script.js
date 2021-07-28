@@ -1,18 +1,18 @@
 // Dependencies
 //form input
-var formEl = $("#form");
+var ba_formEl = $("#form");
 //input element
-var stockInputEl = $("#search");
+var ba_stockInputEl = $("#search");
 
 
 // DATA
 
-var finModPrepBaseURL = "https://financialmodelingprep.com";
+var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
 
 // FUNCTIONS
 
 $(function () {
-  var availableTags = [
+  var ba_availableTags = [
     "AAPL",
     "MSFT",
     "GOOG",
@@ -35,55 +35,47 @@ $(function () {
     "TXN",
   ];
   $("#search").autocomplete({
-    source: availableTags,
+    source: ba_availableTags,
   });
 });
-
-function addFav(event) {
-    event.preventDefault();
-
-    var stckSymb = stockInputEl.val();
-    var endPoint = `/api/v3/profile/${stckSymb}?apikey=70d6b158d23c070db6658a8cac0da9a9`
-    var finModPrepURL = finModPrepBaseURL + endPoint;
-    var stckName = "";
-    fetch(finModPrepURL)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            stckName = data.companyName;
-            localStorage.setItem(stckSymb, stckName)
-            renderStck();
-            console.log(stckName);
-        })
-}
-
-
 
 function renderStck() {
     renderPrice();
     renderNews();
 }
 
-function addFav() {
-  var stckSymb = stockInputEl.val();
-  var endPoint = `/api/v3/profile/${stckSymb}?apikey=70d6b158d23c070db6658a8cac0da9a9`;
-  finModPrepURL = finModPrepBaseURL + endPoint;
-  var stckName = "";
-  fetch(finModPrepURL)
+function addFav(event) {
+  event.preventDefault();
+  var ba_stckSymb = ba_stockInputEl.val();
+  var ba_endPoint = `/api/v3/profile/${ba_stckSymb}?apikey=70d6b158d23c070db6658a8cac0da9a9`;
+  ba_finModPrepURL = ba_finModPrepBaseURL + ba_endPoint;
+  var ba_stckName = "";
+  fetch(ba_finModPrepURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      stckName = data.companyName;
-      console.log(stckName);
+      ba_stckName = data[0].companyName;
+      localStorage.setItem(ba_stckSymb, ba_stckName);
     });
-  localStorage.setItem("stckSymb");
+
 }
+
 
 // USER INTERACTIONS
 
 // user submit stock form
-formEl.on("submit", addFav)
+ba_formEl.on("submit", addFav)
 
 //user clicks on news article
+
+
+
+// DUNCAN 
+
+//* DUNCAN
+
+
+// NAFIS
+
+//* NAFIS
