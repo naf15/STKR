@@ -3,6 +3,8 @@
 var ba_formEl = $("#form");
 //input element
 var ba_stockInputEl = $("#search");
+//
+var tickerEl = $('.ticker')
 
 
 // DATA
@@ -39,7 +41,7 @@ $(function () {
   });
 });
 
-function renderStck() {
+function renderStckCard() {
     renderPrice();
     renderNews();
 }
@@ -57,9 +59,17 @@ function addFav(event) {
     .then(function (data) {
       ba_stckName = data[0].companyName;
       localStorage.setItem(ba_stckSymb, ba_stckName);
+      renderStck()
     });
 
 }
+
+
+// var ticker = document.querySelector('.ticker')
+//   , list = document.querySelector('.ticker__list')
+//   , clone = list.cloneNode(true)
+
+// ticker.append(clone)
 
 
 // USER INTERACTIONS
