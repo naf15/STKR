@@ -76,6 +76,39 @@ ba_formEl.on("submit", addFav)
 //* DUNCAN
 
 
-// NAFIS
+/*=============================
+DISPLAY FINANCIAL NEWS - NAFIS
+=============================*/
 
-//* NAFIS
+/*==============
+DEPENDENCIES
+==============*/
+
+/*==============
+DATA
+==============*/
+
+var stockTicker = 'AAPL';
+var APIKey = '4e48677e67d7cfd40210605712bdb9a0';
+var newsUrl = `https://financialmodelingprep.com/api/v3/stock_news?tickers=${stockTicker}&limit=5&apikey=${APIKey}`;
+
+/*==============
+FUNCTIONS
+==============*/
+
+function createNewsCard () {
+  var card = $()
+}
+
+/*==============
+INITIALIZATION
+==============*/
+
+fetch(newsUrl)
+  .then(function (response) {
+  return response.json();
+})
+  .then(function (data) {
+  console.log('Fetch Response \n-------------');
+  console.log(data);
+});
