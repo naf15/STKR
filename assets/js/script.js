@@ -1,14 +1,12 @@
 // Dependencies
+
 var formEl = $("#form");
 var stockInputEl = $("#search");
+
 
 // DATA
 
 var finModPrepBaseURL = "https://financialmodelingprep.com"
-
-
-// var stock = "Apple";
-// var stocksymbol = "AAPL";
 
 
 // FUNCTIONS
@@ -27,7 +25,7 @@ function addFav(event) {
 
     var stckSymb = stockInputEl.val();
     var endPoint = `/api/v3/profile/${stckSymb}?apikey=70d6b158d23c070db6658a8cac0da9a9`
-    finModPrepURL = finModPrepBaseURL + endPoint;
+    var finModPrepURL = finModPrepBaseURL + endPoint;
     var stckName = "";
     fetch(finModPrepURL)
         .then(function (response) {
@@ -35,13 +33,24 @@ function addFav(event) {
         })
         .then(function (data) {
             stckName = data.companyName;
+            localStorage.setItem(stckSymb, stckName)
+            renderStck();
             console.log(stckName);
         })
-    localStorage.setItem("stckSymb", )
+}
+
+
+
+function renderStck() {
+    renderPrice();
+    renderNews();
 }
 
 
 
 // USER INTERACTIONS
 
-FormEl.on("submit", addFav)
+// user submit stock form
+formEl.on("submit", addFav)
+
+//user clicks on news article
