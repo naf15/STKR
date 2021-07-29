@@ -43,7 +43,7 @@ $(function () {
   });
 });
 
-function renderStckCard() {
+function renderStockCard() {
     renderPrice();
     renderNews();
 }
@@ -61,7 +61,7 @@ function addFav(event) {
     .then(function (data) {
       ba_stckName = data[0].companyName;
       localStorage.setItem(ba_stckSymb, ba_stckName);
-      renderStck()
+      renderStockCard()
     });
 
 }
