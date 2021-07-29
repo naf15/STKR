@@ -61,11 +61,7 @@ function addFav(event) {
     .then(function (data) {
       ba_stckName = data[0].companyName;
       localStorage.setItem(ba_stckSymb, ba_stckName);
-<<<<<<< HEAD
       renderStockCard()
-=======
-      renderStckCard()
->>>>>>> main
     });
 
 }
