@@ -43,7 +43,8 @@ body {
 .ticker__list {
   display: flex;
   margin-top: 20px;
-  animation: ticker 15s infinite linear;
+  animation: ticker 20s infinite linear;
+  list-style-type: none;
 }
 .ticker:hover .ticker__list {
   animation-play-state: paused;

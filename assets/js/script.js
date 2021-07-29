@@ -4,9 +4,9 @@ var ba_formEl = $("#form");
 //input element
 var ba_stockInputEl = $("#search");
 // ticker element
-var tickerEl = $('.ticker');
+//var tickerEl = $('.ticker');
 // list element
-listEl = $('.ticker__list');
+//listEl = $('.ticker__list');
 
 
 // DATA
@@ -43,7 +43,7 @@ $(function () {
   });
 });
 
-function renderStckCard() {
+function renderStockCard() {
     renderPrice();
     renderNews();
 }
@@ -61,7 +61,11 @@ function addFav(event) {
     .then(function (data) {
       ba_stckName = data[0].companyName;
       localStorage.setItem(ba_stckSymb, ba_stckName);
+<<<<<<< HEAD
+      renderStockCard()
+=======
       renderStckCard()
+>>>>>>> main
     });
 
 }
