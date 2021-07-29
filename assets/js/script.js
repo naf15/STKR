@@ -59,7 +59,7 @@ function addFav(event) {
     .then(function (data) {
       ba_stckName = data[0].companyName;
       localStorage.setItem(ba_stckSymb, ba_stckName);
-      renderStck()
+      renderStckCard()
     });
 
 }
@@ -83,7 +83,33 @@ ba_formEl.on("submit", addFav)
 
 // DUNCAN 
 
+var db_containerEl =  $(".container");
+
+var db_priceEl = $(".stock-price");
+
+var db_requestUrl = "https://financialmodelingprep.com";
+
+
 //* DUNCAN
+
+function renderPrice(event){
+  event.preventDefault()
+  var db_containerEl = db_priceEl.val();
+  
+  var db_priceEl = "https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86";
+  fetch(db_priceAPi)
+  .then(function(response){
+    return response.json();
+    })
+    .then(function(){
+     localStorage.setItem(db_priceEl, db_containerEl);
+     renderPrice();
+    })
+  console.log(response)
+}
+
+//fetch("https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86")
+
 
 
 // NAFIS
