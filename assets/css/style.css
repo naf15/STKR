@@ -1,3 +1,38 @@
+* {
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+
+:root {
+  --heading: "Kanit", sans-serif;
+  --body: "Raleway", sans-serif;
+}
+
+header {
+  background-color: rgb(104, 4, 4);
+  color: white;
+}
+h1 {
+  font-family: var(--heading);
+  font-size: 50px;
+  padding: 5px;
+}
+
+form {
+  display: flex;
+}
+
+footer {
+  background-color: whitesmoke;
+}
+
+footer h4 {
+  font-family: var(--heading);
+}
+
+footer p {
+  font-family: var(--body);
+}
 /* https://codepen.io/KenanYusuf/pen/eRprzN */
 body {
   overflow: hidden;
