@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * {
   box-sizing: border-box;
   border: 1px solid red;
@@ -33,3 +34,44 @@ footer h4 {
 footer p {
   font-family: var(--body);
 }
+=======
+/* https://codepen.io/KenanYusuf/pen/eRprzN */
+body {
+  overflow: hidden;
+}
+.ticker {
+  display: flex;
+}
+.ticker__list {
+  display: flex;
+  margin-top: 20px;
+  animation: ticker 15s infinite linear;
+}
+.ticker:hover .ticker__list {
+  animation-play-state: paused;
+}
+.ticker__item {
+  margin-right: 20px;
+}
+@-moz-keyframes ticker {
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@-webkit-keyframes ticker {
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@-o-keyframes ticker {
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes ticker {
+  100% {
+    transform: translateX(-100%);
+  }
+}
+/* https://codepen.io/KenanYusuf/pen/eRprzN */
+>>>>>>> main
