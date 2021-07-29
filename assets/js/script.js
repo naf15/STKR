@@ -13,39 +13,59 @@ var ba_stockInputEl = $("#search");
 
 var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
 
+// var ba_availableTags = [
+//   "AAPL",
+//   "MSFT",
+//   "GOOG",
+//   "GOOGL",
+//   "AMZN",
+//   "FB",
+//   "TSLA",
+//   "NVDA",
+//   "PYPL",
+//   "ASML",
+//   "ADBE",
+//   "CMCSA",
+//   "CSCO",
+//   "NFLX",
+//   "PEP",
+//   "INTC",
+//   "AVGO",
+//   "COST",
+//   "TMUS",
+//   "TXN",
+// ];
+
+var possibleSymbols = [];
+
+getSymbols();
+var ba_favArr = [];
+
+ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
+
+console.log(ba_favArr);
 // FUNCTIONS
 
 $(function () {
-  var ba_availableTags = [
-    "AAPL",
-    "MSFT",
-    "GOOG",
-    "GOOGL",
-    "AMZN",
-    "FB",
-    "TSLA",
-    "NVDA",
-    "PYPL",
-    "ASML",
-    "ADBE",
-    "CMCSA",
-    "CSCO",
-    "NFLX",
-    "PEP",
-    "INTC",
-    "AVGO",
-    "COST",
-    "TMUS",
-    "TXN",
-  ];
   $("#search").autocomplete({
-    source: ba_availableTags,
+    source: possibleSymbols,
   });
 });
 
-function renderStockCard() {
-    renderPrice();
-    renderNews();
+function getSymbols() {
+  var stockSymbolsURL = `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=70d6b158d23c070db6658a8cac0da9a9`
+  fetch(stockSymbolsURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      for (var i = 0; i < data.length; i++) {
+        possibleSymbols.push(data[i].symbol)
+      }
+      console.log(possibleSymbols);
+
+    });
 }
 
 function addFav(event) {
@@ -59,9 +79,16 @@ function addFav(event) {
       return response.json();
     })
     .then(function (data) {
-      ba_stckName = data[0].companyName;
-      localStorage.setItem(ba_stckSymb, ba_stckName);
-      renderStckCard()
+      console.log(data);
+      if (data.length > 0) {
+        if (!ba_favArr) {
+          ba_favArr = [];
+        }
+        ba_favArr.push(ba_stckSymb)
+        ba_strFavArr = JSON.stringify(ba_favArr);
+        localStorage.setItem("SavedStocks", ba_strFavArr);  
+      }
+      
     });
 
 }
@@ -107,7 +134,7 @@ function renderPrice(event){
   .then(function(response){
     return response.json();
     })
-    .then(function(){
+    .then(function(data){
      localStorage.setItem(db_priceEl, db_containerEl);
      renderPrice();
     })
@@ -243,7 +270,7 @@ fetch(na_newsUrl)
     console.log(data);
     na_stocksNewsArray = data; // do you index data?
     console.log(na_stocksNewsArray);
-    renderFaveStockCards();
+    //renderFaveStockCards();
   });
 
 na_newsCards.on('click','.news-card', function () {
