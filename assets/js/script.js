@@ -258,7 +258,7 @@ fetch(na_newsUrl)
     console.log(data);
     na_stocksNewsArray = data; 
     console.log(na_stocksNewsArray);
-    //renderFaveStockCards();
+    renderFaveStockCards();
   });
 
 na_newsCards.on("click", ".news-card", function () {
