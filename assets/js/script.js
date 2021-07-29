@@ -3,8 +3,10 @@
 var ba_formEl = $("#form");
 //input element
 var ba_stockInputEl = $("#search");
-//
-var tickerEl = $('.ticker')
+// ticker element
+var tickerEl = $('.ticker');
+// list element
+listEl = $('.ticker__list');
 
 
 // DATA
@@ -64,12 +66,16 @@ function addFav(event) {
 
 }
 
+// TODO: (Nafis) function to fetch and parse stock prices
 
-// var ticker = document.querySelector('.ticker')
-//   , list = document.querySelector('.ticker__list')
-//   , clone = list.cloneNode(true)
+// TODO: (Nafis) Write a function to render stock prices
 
-// ticker.append(clone)
+
+
+
+clone = listEl.cloneNode(true)
+
+tickerEl.append(clone)
 
 
 // USER INTERACTIONS
@@ -77,7 +83,7 @@ function addFav(event) {
 // user submit stock form
 ba_formEl.on("submit", addFav)
 
-//user clicks on news article
+
 
 
 
