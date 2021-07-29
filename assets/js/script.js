@@ -146,8 +146,9 @@ function renderNewsCard (stockData) {
     'color': 'white',
     'padding': '20px',
     'margin' : '10px',
-    'border-bottom-right-radius' : '30px',
-    'border-bottom-left-radius' : '30px'
+    'border-bottom-right-radius' : '5px',
+    'border-bottom-left-radius' : '5px',
+    'box-shadow' : '5px 5px 15px rgba(0, 0, 0, 0.897)'
   }); 
   
     // "height": "200px", "background-image": `url(${na_newsImageUrl})`, "font-size": "200%"});
@@ -161,6 +162,28 @@ function renderNewsCard (stockData) {
   na_card.append(na_cardNewsTitle);
   na_card.append(na_cardNewsText);
 }
+
+// Carousel
+
+// var slideIndex = 1;
+// showDivs(slideIndex);
+
+// function plusDivs(n) {
+//   showDivs(slideIndex += n);
+// }
+
+// function showDivs(n) {
+//   var i;
+//   var x = document.getElementsByClassName("mySlides");
+//   if (n > x.length) {slideIndex = 1}
+//   if (n < 1) {slideIndex = x.length} ;
+//   for (i = 0; i < x.length; i++) {
+//     x[i].style.display = "none";
+//   }
+//   x[slideIndex-1].style.display = "block";
+// }
+
+// Carousel
 
 /*==============
 INITIALIZATION
