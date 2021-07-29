@@ -241,7 +241,7 @@ fetch(na_newsUrl)
   .then(function (data) {
     console.log('Fetch Response \n-------------');
     console.log(data);
-    na_stocksNewsArray = data; // do you index data?
+    na_stocksNewsArray = data; 
     console.log(na_stocksNewsArray);
     renderFaveStockCards();
   });
