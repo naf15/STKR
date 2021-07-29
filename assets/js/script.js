@@ -3,10 +3,8 @@
 var ba_formEl = $("#form");
 //input element
 var ba_stockInputEl = $("#search");
-// ticker element
-var tickerEl = $('.ticker');
-// list element
-listEl = $('.ticker__list');
+//
+var tickerEl = $('.ticker')
 
 
 // DATA
@@ -61,21 +59,17 @@ function addFav(event) {
     .then(function (data) {
       ba_stckName = data[0].companyName;
       localStorage.setItem(ba_stckSymb, ba_stckName);
-      renderStckCard()
+      renderStck()
     });
 
 }
 
-// TODO: (Nafis) function to fetch and parse stock prices
 
-// TODO: (Nafis) Write a function to render stock prices
+// var ticker = document.querySelector('.ticker')
+//   , list = document.querySelector('.ticker__list')
+//   , clone = list.cloneNode(true)
 
-
-
-
-clone = listEl.cloneNode(true)
-
-tickerEl.append(clone)
+// ticker.append(clone)
 
 
 // USER INTERACTIONS
@@ -83,38 +77,34 @@ tickerEl.append(clone)
 // user submit stock form
 ba_formEl.on("submit", addFav)
 
-
+//user clicks on news article
 
 
 
 // DUNCAN 
 
-var db_containerEl =  $(".container");
+var db_containerEl =  $(".container")
 
-var db_priceEl = $(".stock-price");
+var db_priceEl = $(".stock-price")
 
-var db_requestUrl = "https://financialmodelingprep.com";
 
 
 //* DUNCAN
 
-function renderPrice(event){
-  event.preventDefault()
+function renderPrice(){
   var db_containerEl = db_priceEl.val();
-  
-  var db_priceEl = "https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86";
+  var requestUrl = "https://financialmodelingprep.com/";
+  var db_priceEl = "https://financialmodelingprep.com/api/v3/quote-short/AAPL?apikey=f4ffe18f8adcc3fc91a869983823de86";
   fetch(db_priceAPi)
   .then(function(response){
     return response.json();
     })
     .then(function(){
-     localStorage.setItem(db_priceEl, db_containerEl);
-     renderPrice();
+     localStorage.setItem(db_priceEl, db_containerEl)
     })
   console.log(response)
 }
 
-//fetch("https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86")
 
 
 
