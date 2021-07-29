@@ -18,7 +18,18 @@ h1 {
   padding: 5px;
 }
 
-p {
+form {
+  display: flex;
+}
+
+footer {
+  background-color: whitesmoke;
+}
+
+footer h4 {
+  font-family: var(--heading);
+}
+
+footer p {
   font-family: var(--body);
-  font-size: 50px;
 }
