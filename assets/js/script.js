@@ -77,9 +77,9 @@ function addFav(event) {
 
 
 
-clone = listEl.cloneNode(true)
+// clone = listEl.cloneNode(true)
 
-tickerEl.append(clone)
+// tickerEl.append(clone)
 
 
 // USER INTERACTIONS
