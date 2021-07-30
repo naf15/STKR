@@ -15,6 +15,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Kanit&family=Raleway:wght@200;300&display=swap"
       rel="stylesheet"
     />
@@ -25,130 +29,51 @@
     <header>
       <h1>STKR</h1>
     </header>
-    <!-- <div class="ticker">
-      <ul class="ticker__list">
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item1&color=f3e5f5"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item2&color=ede7f6"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item3&color=ffcdd2"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item4&color=f8bbd0"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item5&color=e8eaf6"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item6&color=e3f2fd"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item7&color=e1f5fe"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item8&color=e0f7fa"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item9&color=f3e5f5"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item10&color=ede7f6"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item11&color=ffcdd2"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item12&color=f8bbd0"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item13&color=e8eaf6"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item14&color=e3f2fd"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item15&color=e1f5fe"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item16&color=e0f7fa"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item17&color=e8eaf6"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item18&color=e3f2fd"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item19&color=e1f5fe"
-            alt=""
-          />
-        </li>
-        <li class="ticker_item">
-          <img
-            src="https://img.clock.co.uk/200x100?text=Item20&color=e0f7fa"
-            alt=""
-          />
-        </li>
-      </ul>
-    </div> -->
+    <div class="swiper-container mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+        <div class="swiper-slide">
+          <h4></h4>
+          <p></p>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
     <aside>
       <form id="form">
         <input
@@ -161,13 +86,53 @@
       </form>
     </aside>
 
+
+   
+
     <div class="news-container">
       <div class="news-card"></div>
     </div>
-    <div class="price-container"></div>
+  
     <div id="news-container" class="news-container">
       <div class="news-card"></div>
     </div>
+    <!-- stock cards -->
+    
+    <div class="row">
+      <div class="column">
+        <div class="card">
+          <h3>AAPL</h3>
+          <!-- placement price not accurate -->
+          <p>Price $145.82</p>
+          
+        </div>
+      </div>
+    
+      <div class="column">
+        <div class="card">
+          <h3>AMZN</h3>
+          <p>Price</p>
+          
+        </div>
+      </div>
+    
+      <div class="column">
+        <div class="card">
+          <h3>MSFT</h3>
+          <p>Price</p>
+          
+        </div>
+      </div>
+    
+      <div class="column">
+        <div class="card">
+          <h3>FB</h3>
+          <p>Price</p>
+          
+        </div>
+      </div>
+    </div>
+
     <h4>Made With:</h4>
     <div class="madeWith">
       <img class="logo" src="images/redditLogo.png" alt="reddit Logo" />
@@ -181,24 +146,7 @@
   </body>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="./assets/js/script.js"></script>
 </html>
 
-<!-- .ticker
-  .ticker__list
-    .ticker__item
-      img(src='https://img.clock.co.uk/250x100?text=Item 1&background-color=f3e5f5')
-    .ticker__item
-      img(src='https://img.clock.co.uk/300x100?text=Item 2&background-color=ede7f6')
-    .ticker__item
-      img(src='https://img.clock.co.uk/200x100?text=Item 3&background-color=ffcdd2')
-    .ticker__item
-      img(src='https://img.clock.co.uk/100x100?text=Item 4&background-color=f8bbd0')
-    .ticker__item
-      img(src='https://img.clock.co.uk/350x100?text=Item 5&background-color=e8eaf6')
-    .ticker__item
-      img(src='https://img.clock.co.uk/100x100?text=Item 6&background-color=e3f2fd')
-    .ticker__item
-      img(src='https://img.clock.co.uk/250x100?text=Item 7&background-color=e1f5fe')
-    .ticker__item
-      img(src='https://img.clock.co.uk/150x100?text=Item 8&background-color=e0f7fa')  -->

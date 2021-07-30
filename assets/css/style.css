@@ -3,7 +3,7 @@
 * {
   box-sizing: border-box;
   border: 1px solid red;
-}
+} */
 
 :root {
   --heading: "Kanit", sans-serif;
@@ -13,7 +13,7 @@
 /* Element Styles */
 
 header {
-  background-color: rgb(104, 4, 4);
+  background-color: rgb(44, 41, 41);
   color: white;
 }
 h1 {
@@ -52,49 +52,53 @@ footer p {
   height: 200px;
   width: auto;
 }
+/* https://codesandbox.io/s/vthfm?file=/index.html:414-1425 */
+body {
+  position: relative;
+  height: 100%;
+}
 
-/* ID Styles */
-/* Ticker Styles */
-/* https://codepen.io/KenanYusuf/pen/eRprzN */
-/* body {
-  overflow: hidden;
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
 }
-.ticker {
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
 }
-.ticker__list {
-  display: flex;
-  margin-top: 20px;
-  animation: ticker 20s infinite linear;
-  list-style-type: none;
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.ticker:hover .ticker__list {
-  animation-play-state: paused;
-}
-.ticker__item {
-  margin-right: 20px;
-}
-@-moz-keyframes ticker {
-  100% {
-    transform: translateX(-100%);
-  }
-}
-@-webkit-keyframes ticker {
-  100% {
-    transform: translateX(-100%);
-  }
-}
-@-o-keyframes ticker {
-  100% {
-    transform: translateX(-100%);
-  }
-}
-@keyframes ticker {
-  100% {
-    transform: translateX(-100%);
-  }
-} */
-/* https://codepen.io/KenanYusuf/pen/eRprzN */
+/* https://codesandbox.io/s/vthfm?file=/index.html:414-1425*/
 
 /* Nafis css */
 
@@ -106,3 +110,28 @@ footer p {
 }
 
 /* Nafis css */
+
+/* stock cards */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+.row {
+  margin: 0 -5px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+/* end of cards */

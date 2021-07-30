@@ -3,23 +3,45 @@
 var ba_formEl = $("#form");
 //input element
 var ba_stockInputEl = $("#search");
-// ticker element
-//var tickerEl = $('.ticker');
-// list element
-//listEl = $('.ticker__list');
+// swiper element
+var swiperContainer = $(".swiper-container");
+
 
 // DATA
 
-var ba_finModPrepBaseURL = `https://financialmodelingprep.com`;
+var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
+
+// var ba_availableTags = [
+//   "AAPL",
+//   "MSFT",
+//   "GOOG",
+//   "GOOGL",
+//   "AMZN",
+//   "FB",
+//   "TSLA",
+//   "NVDA",
+//   "PYPL",
+//   "ASML",
+//   "ADBE",
+//   "CMCSA",
+//   "CSCO",
+//   "NFLX",
+//   "PEP",
+//   "INTC",
+//   "AVGO",
+//   "COST",
+//   "TMUS",
+//   "TXN",
+// ];
 
 var possibleSymbols = [];
 
-getSymbols();
+
 var ba_favArr = [];
 
 ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
 
-console.log(ba_favArr);
+
 // FUNCTIONS
 
 $(function () {
@@ -27,13 +49,6 @@ $(function () {
     source: possibleSymbols,
   });
 });
-
-// function renderStocksfromLocalStorage() {
-//   stocksArr = JSON.parse(localStorage.getItem("SavedStocks"));
-//   for (var i = 0; i < stocksArr.length; i++) {
-
-//   }
-// }
 
 function getSymbols() {
   var stockSymbolsURL = `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=70d6b158d23c070db6658a8cac0da9a9`;
@@ -80,14 +95,54 @@ function addFav(event) {
     });
 }
 
-// clone = listEl.cloneNode(true)
+function getRedditPosts() {
+  var redditAPIURL = "https://www.reddit.com/r/finance/new.json?sort=hot"
+  fetch(redditAPIURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var swiperCards = swiperContainer.children().children();
+      var numOfTicker = 20;
+      for (var i = 0; i < numOfTicker; i++) {
+        var headingTitle = swiperCards.children().eq(2*i);
+        var pBody = swiperCards.children().eq(2*i + 1);
+        var postTitle = data.data.children[i].data.title;
+        var postBody = data.data.children[i].data.selftext;
+        headingTitle.text(postTitle.slice(0,50) + "...");
+        pBody.text( postBody.slice(0,100) + "...");
+      }
+    });
+}
 
-// tickerEl.append(clone)
+var swiper = new Swiper(".mySwiper", {
+  slidesPerView: 3,
+  spaceBetween: 30,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
 
 // USER INTERACTIONS
 
+getSymbols();
+
 // user submit stock form
 ba_formEl.on("submit", addFav);
+
+// Initialization
+
+getSymbols();
+getRedditPosts();
 
 // DUNCAN
 
@@ -114,6 +169,9 @@ function getStockData(stockTicker) {
     console.log(data);
     return data;
   }
+
+  
+
 
   //fetch("https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86")
 
