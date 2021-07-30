@@ -8,7 +8,6 @@ var ba_stockInputEl = $("#search");
 // list element
 //listEl = $('.ticker__list');
 
-
 // DATA
 
 var ba_finModPrepBaseURL = `https://financialmodelingprep.com`;
@@ -37,7 +36,7 @@ $(function () {
 // }
 
 function getSymbols() {
-  var stockSymbolsURL = `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=70d6b158d23c070db6658a8cac0da9a9`
+  var stockSymbolsURL = `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=70d6b158d23c070db6658a8cac0da9a9`;
   fetch(stockSymbolsURL)
     .then(function (response) {
       return response.json();
@@ -45,10 +44,9 @@ function getSymbols() {
     .then(function (data) {
       console.log(data);
       for (var i = 0; i < data.length; i++) {
-        possibleSymbols.push(data[i].symbol)
+        possibleSymbols.push(data[i].symbol);
       }
       console.log(possibleSymbols);
-
     });
 }
 
@@ -86,53 +84,47 @@ function addFav(event) {
 
 // TODO: (Nafis) Write a function to render stock prices
 
-
-
-
 // clone = listEl.cloneNode(true)
 
 // tickerEl.append(clone)
 
-
 // USER INTERACTIONS
 
 // user submit stock form
-ba_formEl.on("submit", addFav)
+ba_formEl.on("submit", addFav);
 
+// DUNCAN
 
-
-
-
-// DUNCAN 
-
-var db_containerEl =  $(".container");
+var db_containerEl = $(".container");
 
 var db_priceEl = $(".stock-price");
 
 var db_requestUrl = "https://financialmodelingprep.com";
 
-
 //* DUNCAN
 
-function renderPrice(event){
-  event.preventDefault()
+function renderPrice(event) {
+  event.preventDefault();
   var db_containerEl = db_priceEl.val();
-  
-  var db_priceEl = "https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86";
+
+  var db_priceEl =
+    "https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86";
   fetch(db_priceAPi)
-  .then(function(response){
-    return response.json();
+    .then(function (response) {
+      return response.json();
     })
-    .then(function(data){
-     localStorage.setItem(db_priceEl, db_containerEl);
-     renderPrice();
+    .then(function (data) {
+      localStorage.setItem(db_priceEl, db_containerEl);
+      renderPrice();
     })
-  console.log(response)
+    .then(function () {
+      localStorage.setItem(db_priceEl, db_containerEl);
+      renderPrice();
+    });
+  console.log(response);
 }
 
 //fetch("https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86")
-
-
 
 /*=============================
 DISPLAY FINANCIAL NEWS - NAFIS
@@ -142,75 +134,73 @@ DISPLAY FINANCIAL NEWS - NAFIS
 DEPENDENCIES
 ==============*/
 
-var na_newsCards = $('.news-container');
+var na_newsCards = $(".news-container");
 
 /*==============
 DATA
 ==============*/
 
-var na_favStocks = ['AAPL','GOOG','GME','WDC'];
-// var na_stockTicker = 'AAPL'; 
-var na_APIKey = '4e48677e67d7cfd40210605712bdb9a0';
-var na_newsUrl = '' // `https://financialmodelingprep.com/api/v3/stock_news?tickers=${na_stockTicker}&limit=5&apikey=${na_APIKey}`;
+var na_favStocks = ["AAPL", "GOOG", "GME", "WDC"];
+// var na_stockTicker = 'AAPL';
+var na_APIKey = "4e48677e67d7cfd40210605712bdb9a0";
+var na_newsUrl = ""; // `https://financialmodelingprep.com/api/v3/stock_news?tickers=${na_stockTicker}&limit=5&apikey=${na_APIKey}`;
 var na_stocksNewsArray = [];
-var na_favStocksString = '';
-var na_article_limit = na_favStocks.length*3;
+var na_favStocksString = "";
+var na_article_limit = na_favStocks.length * 3;
 
 /*==============
 FUNCTIONS
 ==============*/
 
-function stringifyFavStocks (list) {
-  var stringifiedList = '';
-  for (var i=0; i<list.length-1; i++) {
+function stringifyFavStocks(list) {
+  var stringifiedList = "";
+  for (var i = 0; i < list.length - 1; i++) {
     // Appends each stock ticker to a comma-separated string for API call
-    stringifiedList += list[i] + ',';
+    stringifiedList += list[i] + ",";
   }
-  stringifiedList += list[length-1];
+  stringifiedList += list[length - 1];
   return stringifiedList;
-};
+}
 
-function renderFaveStockCards () {
-  
-  for (var i=0; i<na_favStocks.length; i++) {
+function renderFaveStockCards() {
+  for (var i = 0; i < na_favStocks.length; i++) {
     var na_stockTicker = na_favStocks[i];
-    
-    for (var j=0; j<na_stocksNewsArray.length; j++) {
+
+    for (var j = 0; j < na_stocksNewsArray.length; j++) {
       var na_stockNews = na_stocksNewsArray[j];
-      
+
       if (na_stockNews.symbol === na_stockTicker) {
         console.log(na_stockNews);
         renderNewsCard(na_stockNews);
-      };
-    };
-  };
-};
+      }
+    }
+  }
+}
 
-function renderNewsCard (stockData) {
-  var na_card = $('<div>');
-  var na_cardNewsTitle = $('<h2>');
-  var na_cardNewsText = $('<p>');
+function renderNewsCard(stockData) {
+  var na_card = $("<div>");
+  var na_cardNewsTitle = $("<h2>");
+  var na_cardNewsText = $("<p>");
   var na_newsImageUrl = stockData.image;
   var na_stockNewsTitle = stockData.title;
   var na_stockNewsText = stockData.text;
-  
-  na_card.attr('class','news-card')
-  
-  na_card.css({
-    'background-image': `linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.53)), url(${na_newsImageUrl})`,
-    'width': '70%',
-    'height': '400px',
-    'background-size': 'cover',
-    'color': 'white',
-    'padding': '20px',
-    'margin' : '10px',
-    'border-bottom-right-radius' : '5px',
-    'border-bottom-left-radius' : '5px',
-    'box-shadow' : '5px 5px 15px rgba(0, 0, 0, 0.897)'
-  }); 
-  
-    // "height": "200px", "background-image": `url(${na_newsImageUrl})`, "font-size": "200%"});
 
+  na_card.attr("class", "news-card");
+
+  na_card.css({
+    "background-image": `linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.53)), url(${na_newsImageUrl})`,
+    width: "600px",
+    height: "400px",
+    "background-size": "cover",
+    color: "white",
+    padding: "20px",
+    margin: "10px",
+    "border-bottom-right-radius": "5px",
+    "border-bottom-left-radius": "5px",
+    "box-shadow": "5px 5px 15px rgba(0, 0, 0, 0.897)",
+  });
+
+  // "height": "200px", "background-image": `url(${na_newsImageUrl})`, "font-size": "200%"});
 
   na_cardNewsTitle.text(na_stockNewsTitle);
   na_cardNewsText.text(na_stockNewsText);
@@ -255,13 +245,13 @@ fetch(na_newsUrl)
     return response.json();
   })
   .then(function (data) {
-    console.log('Fetch Response \n-------------');
+    console.log("Fetch Response \n-------------");
     console.log(data);
-    na_stocksNewsArray = data; // do you index data?
+    na_stocksNewsArray = data; 
     console.log(na_stocksNewsArray);
-    //renderFaveStockCards();
+    renderFaveStockCards();
   });
 
-na_newsCards.on('click','.news-card', function () {
-  console.log('open new tab');
+na_newsCards.on("click", ".news-card", function () {
+  console.log("open new tab");
 });
