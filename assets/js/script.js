@@ -69,20 +69,16 @@ function addFav(event) {
         if (ba_favArr.length < 5) {
           ba_favArr.push(ba_stckSymb);
           ba_strFavArr = JSON.stringify(ba_favArr);
-          localStorage.setItem("SavedStocks", ba_strFavArr);  
+          localStorage.setItem("SavedStocks", ba_strFavArr);
         } else {
           ba_favArr.push(ba_stckSymb);
           ba_favArr.shift();
           ba_strFavArr = JSON.stringify(ba_favArr);
           localStorage.setItem("SavedStocks", ba_strFavArr);
         }
-      }  
+      }
     });
 }
-
-// TODO: (Nafis) function to fetch and parse stock prices
-
-// TODO: (Nafis) Write a function to render stock prices
 
 // clone = listEl.cloneNode(true)
 
