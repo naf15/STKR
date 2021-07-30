@@ -1,4 +1,6 @@
-/* * {
+/* Global Styles and Variables */
+
+* {
   box-sizing: border-box;
   border: 1px solid red;
 } */
@@ -7,6 +9,8 @@
   --heading: "Kanit", sans-serif;
   --body: "Raleway", sans-serif;
 }
+
+/* Element Styles */
 
 header {
   background-color: rgb(44, 41, 41);
@@ -35,6 +39,8 @@ footer p {
   font-family: var(--body);
   text-align: center;
 }
+
+/* Class Styles */
 
 .madeWith {
   display: flex;
