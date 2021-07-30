@@ -30,11 +30,12 @@ The following is a preliminary wireframe image of the desktop version of the app
 
 ### APIs and CSS Framework
 
-For the successful completion of this project, we used two financial server-side APIs: Financial Modeling Prep and FinnHub. Both APIs provide up-to-date pricing information and news for the main content of the page. CSS styling is backed up by Bulma.
+For the successful completion of this project, we used two financial server-side APIs: Financial Modeling Prep and reddit. FMP provides up-to-date pricing information and news for the main content of the page. Reddit is a source of user experiences with finance and stocks, providing a unique perspective on the market. CSS styling is backed up by Bulma.
 
 ### Breakdown of Features
 
 STKR displays locally stored stock preference information and news in cards on the landing page.
 
+Base code for slides carousel provided by Swiper.
 Base code for the stock ticker comes courtesy of:
 https://codesandbox.io/s/vthfm?file=/index.html:414-1425
