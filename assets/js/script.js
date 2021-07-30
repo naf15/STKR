@@ -10,7 +10,30 @@ var ba_stockInputEl = $("#search");
 
 // DATA
 
-var ba_finModPrepBaseURL = `https://financialmodelingprep.com`;
+var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
+
+// var ba_availableTags = [
+//   "AAPL",
+//   "MSFT",
+//   "GOOG",
+//   "GOOGL",
+//   "AMZN",
+//   "FB",
+//   "TSLA",
+//   "NVDA",
+//   "PYPL",
+//   "ASML",
+//   "ADBE",
+//   "CMCSA",
+//   "CSCO",
+//   "NFLX",
+//   "PEP",
+//   "INTC",
+//   "AVGO",
+//   "COST",
+//   "TMUS",
+//   "TXN",
+// ];
 
 var possibleSymbols = [];
 
@@ -27,13 +50,6 @@ $(function () {
     source: possibleSymbols,
   });
 });
-
-// function renderStocksfromLocalStorage() {
-//   stocksArr = JSON.parse(localStorage.getItem("SavedStocks"));
-//   for (var i = 0; i < stocksArr.length; i++) {
-
-//   }
-// }
 
 function getSymbols() {
   var stockSymbolsURL = `https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=70d6b158d23c070db6658a8cac0da9a9`;
@@ -66,17 +82,10 @@ function addFav(event) {
         if (!ba_favArr) {
           ba_favArr = [];
         }
-        if (ba_favArr.length < 5) {
-          ba_favArr.push(ba_stckSymb);
-          ba_strFavArr = JSON.stringify(ba_favArr);
-          localStorage.setItem("SavedStocks", ba_strFavArr);  
-        } else {
-          ba_favArr.push(ba_stckSymb);
-          ba_favArr.shift();
-          ba_strFavArr = JSON.stringify(ba_favArr);
-          localStorage.setItem("SavedStocks", ba_strFavArr);
-        }
-      }  
+        ba_favArr.push(ba_stckSymb);
+        ba_strFavArr = JSON.stringify(ba_favArr);
+        localStorage.setItem("SavedStocks", ba_strFavArr);
+      }
     });
 }
 
@@ -118,6 +127,9 @@ function getStockData(stockTicker) {
     console.log(data);
     return data;
   }
+
+  
+
 
   //fetch("https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86")
 
