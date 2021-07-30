@@ -104,20 +104,28 @@ ba_formEl.on("submit", addFav);
 
 // DUNCAN
 
-var db_apiUrl ="https://financialmodelingprep.com/api/v3/quote-short/AAPL?apikey=f4ffe18f8adcc3fc91a869983823de86";
+var db_apiUrl =`https://financialmodelingprep.com/api/v3/quote-short/${d_stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
 async function getPrice(){
 var response = await fetch(db_apiUrl);
 var data = await response.json()
 var{price, volume} = data;
 console.log(data)
 
-document.getElementById("price").textContent = price;
-document.getElementById("volume").textContent = volume;
+
 
 
 }
 getPrice()
 
+function getStockData(stockTicker){
+ var db_apiUrl =`https://financialmodelingprep.com/api/v3/quote-short/${stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
+async function getPrice(){
+var response = await fetch(db_apiUrl);
+var data = await response.json()
+var{price, volume} = data;
+console.log(data)
+return data;
+};
 
 
 
@@ -254,4 +262,4 @@ fetch(na_newsUrl)
 
 na_newsCards.on("click", ".news-card", function () {
   console.log("open new tab");
-});
+});}
