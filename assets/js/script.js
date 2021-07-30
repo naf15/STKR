@@ -198,7 +198,7 @@ function renderNewsCard(stockData) {
 
   na_card.css({
     "background-image": `linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.53)), url(${na_newsImageUrl})`,
-    width: "70%",
+    width: "600px",
     height: "400px",
     "background-size": "cover",
     color: "white",
@@ -256,9 +256,9 @@ fetch(na_newsUrl)
   .then(function (data) {
     console.log("Fetch Response \n-------------");
     console.log(data);
-    na_stocksNewsArray = data; // do you index data?
+    na_stocksNewsArray = data; 
     console.log(na_stocksNewsArray);
-    //renderFaveStockCards();
+    renderFaveStockCards();
   });
 
 na_newsCards.on("click", ".news-card", function () {
