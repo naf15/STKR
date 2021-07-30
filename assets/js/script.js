@@ -128,6 +128,9 @@ function getStockData(stockTicker) {
     return data;
   }
 
+  
+
+
   //fetch("https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86")
 
   /*=============================
