@@ -37,4 +37,4 @@ For the successful completion of this project, we used two financial server-side
 STKR displays locally stored stock preference information and news in cards on the landing page.
 
 Base code for the stock ticker comes courtesy of:
-https://codepen.io/KenanYusuf/pen/eRprzN
+https://codesandbox.io/s/vthfm?file=/index.html:414-1425

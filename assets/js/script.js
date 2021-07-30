@@ -3,10 +3,9 @@
 var ba_formEl = $("#form");
 //input element
 var ba_stockInputEl = $("#search");
-// ticker element
-//var tickerEl = $('.ticker');
-// list element
-//listEl = $('.ticker__list');
+// swiper element
+var swiperContainer = $(".swiper-container");
+
 
 // DATA
 
@@ -37,12 +36,12 @@ var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
 
 var possibleSymbols = [];
 
-getSymbols();
+
 var ba_favArr = [];
 
 ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
 
-console.log(ba_favArr);
+
 // FUNCTIONS
 
 $(function () {
@@ -89,18 +88,54 @@ function addFav(event) {
     });
 }
 
-// TODO: (Nafis) function to fetch and parse stock prices
+function getRedditPosts() {
+  var redditAPIURL = "https://www.reddit.com/r/finance/new.json?sort=hot"
+  fetch(redditAPIURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var swiperCards = swiperContainer.children().children();
+      var numOfTicker = 20;
+      for (var i = 0; i < numOfTicker; i++) {
+        var headingTitle = swiperCards.children().eq(2*i);
+        var pBody = swiperCards.children().eq(2*i + 1);
+        var postTitle = data.data.children[i].data.title;
+        var postBody = data.data.children[i].data.selftext;
+        headingTitle.text(postTitle.slice(0,50) + "...");
+        pBody.text( postBody.slice(0,100) + "...");
+      }
+    });
+}
 
-// TODO: (Nafis) Write a function to render stock prices
-
-// clone = listEl.cloneNode(true)
-
-// tickerEl.append(clone)
+var swiper = new Swiper(".mySwiper", {
+  slidesPerView: 3,
+  spaceBetween: 30,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
 
 // USER INTERACTIONS
 
+getSymbols();
+
 // user submit stock form
 ba_formEl.on("submit", addFav);
+
+// Initialization
+
+getSymbols();
+getRedditPosts();
 
 // DUNCAN
 
