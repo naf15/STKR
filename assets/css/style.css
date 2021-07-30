@@ -1,3 +1,5 @@
+/* Global Styles and Variables */
+
 * {
   box-sizing: border-box;
   border: 1px solid red;
@@ -7,6 +9,8 @@
   --heading: "Kanit", sans-serif;
   --body: "Raleway", sans-serif;
 }
+
+/* Element Styles */
 
 header {
   background-color: rgb(104, 4, 4);
@@ -36,6 +40,8 @@ footer p {
   text-align: center;
 }
 
+/* Class Styles */
+
 .madeWith {
   display: flex;
   justify-content: space-evenly;
@@ -46,6 +52,9 @@ footer p {
   height: 200px;
   width: auto;
 }
+
+/* ID Styles */
+/* Ticker Styles */
 /* https://codepen.io/KenanYusuf/pen/eRprzN */
 /* body {
   overflow: hidden;
