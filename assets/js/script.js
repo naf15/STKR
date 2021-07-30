@@ -11,30 +11,7 @@ var ba_stockInputEl = $("#search");
 
 // DATA
 
-var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
-
-// var ba_availableTags = [
-//   "AAPL",
-//   "MSFT",
-//   "GOOG",
-//   "GOOGL",
-//   "AMZN",
-//   "FB",
-//   "TSLA",
-//   "NVDA",
-//   "PYPL",
-//   "ASML",
-//   "ADBE",
-//   "CMCSA",
-//   "CSCO",
-//   "NFLX",
-//   "PEP",
-//   "INTC",
-//   "AVGO",
-//   "COST",
-//   "TMUS",
-//   "TXN",
-// ];
+var ba_finModPrepBaseURL = `https://financialmodelingprep.com`;
 
 var possibleSymbols = [];
 
@@ -87,7 +64,7 @@ function addFav(event) {
         ba_favArr.push(ba_stckSymb)
         ba_strFavArr = JSON.stringify(ba_favArr);
         localStorage.setItem("SavedStocks", ba_strFavArr);  
-      }
+      
       
     });
 
