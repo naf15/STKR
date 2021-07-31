@@ -18,15 +18,25 @@
       rel="stylesheet"
       href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Kanit&family=Raleway:wght@200;300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>STKR- The lastest in market and financial news</title>
   </head>
   <body>
-    <header>
+    <header class="header">
       <h1>STKR</h1>
     </header>
     <div class="swiper-container mySwiper">
@@ -125,15 +135,42 @@
       </div>
     </div>
 
+    <!--Formatted with Bulma.io column classes-->
     <h4>Made With:</h4>
-    <div class="madeWith">
-      <img class="logo" src="images/redditLogo.png" alt="reddit Logo" />
-      <img class="logo" src="images/fmpLogo.png" alt="FMP Logo" />
-      <img class="logo" src="images/bulmaLogo.png" alt="Bulma Logo" />
-      <img class="logo" src="images/swiperLogo.png" alt="SwiperJS Logo" />
+    <div class="columns is-desktop madeWith">
+      <img
+        class="column is-three-quarters-mobile is-one-quarter-desktop logo"
+        src="images/redditLogo.png"
+        alt="reddit Logo"
+      />
+      <img
+        class="column is-three-quarters-mobile is-one-quarter-desktop logo"
+        src="images/fmpLogo.png"
+        alt="FMP Logo"
+      />
+      <img
+        class="column is-three-quarters-mobile is-one-quarter-desktop logo"
+        src="images/bulmaLogo.png"
+        alt="Bulma Logo"
+      />
+      <img
+        class="column is-three-quarters-mobile is-one-quarter-desktop logo"
+        src="images/swiperLogo.png"
+        alt="SwiperJS Logo"
+      />
     </div>
-    <footer>
-      <p>This site is not intended to provide financial advice.</p>
+
+    <!--Footer code provided by Bulma.io-->
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>STKR</strong> by <a href="https://github.com/naf15">Nafis</a>,
+          <a href="https://github.com/brickly26">Burak</a>,
+          <a href="https://github.com/DuncanByrne">Duncan</a>, and
+          <a href="https://github.com/rgregg2014">Rachel</a>. It is not intended
+          to provide financial advice.
+        </p>
+      </div>
     </footer>
   </body>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
