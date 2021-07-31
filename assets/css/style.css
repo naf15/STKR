@@ -1,9 +1,9 @@
 /* Global Styles and Variables */
 
-* {
+/* * {
   box-sizing: border-box;
   border: 1px solid red;
-} */
+}  */
 
 :root {
   --heading: "Kanit", sans-serif;
