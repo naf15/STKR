@@ -134,6 +134,15 @@ getRedditPosts();
 DISPLAY STOCK PRICES - DUNCAN
 =============================*/
 
+/*-----NECESSARY-------*/
+// **current price**
+// **stock ticker**
+// **stock full name**
+
+/*-----OPTIONAL-------*/
+// change 
+// change direct (+/-)
+
 // var db_apiUrl = `https://financialmodelingprep.com/api/v3/quote-short/${d_stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
 async function getPrice() {
   var response = await fetch(db_apiUrl);
@@ -206,8 +215,8 @@ function renderNewsCard(newsList, stockNum) {
 
   for (var i=0; i<numArticles; i++) {
     var newSlide = $("#slide-" + stockNum + '-' + (i+1)); 
-    var na_cardNewsTitle = $("<h2>").css({width:"95%"});
-    var na_cardNewsText = $("<p>").css({width:"80%"});
+    var na_cardNewsTitle = $("<h2>").css({width:"95%", 'font-weight':'bolder'});
+    var na_cardNewsText = $("<p>").css({width:"80%", 'font-weight':'lighter'});
     var stockNewsData = newsList[i];
     var na_newsImageUrl = stockNewsData.image;
     var na_stockNewsTitle = stockNewsData.title;

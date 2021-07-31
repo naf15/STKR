@@ -218,6 +218,10 @@ body {
   animation-duration: 60s;  /* 30s */
 }
 
+.ticker:hover {
+  animation-play-state: paused;
+}
+
 .ticker__item {
   display: inline-block;
   font-family: 'VT323', monospace;
@@ -230,10 +234,10 @@ body {
   color: rgba(255, 82, 0, 0.76);
 };
 
-.ticker__item a:hover {
-  color: rgb(255, 81, 0);
-};
 
+a:hover {
+  color: rgb(94, 255, 0);
+}; 
 
 
 
@@ -269,6 +273,9 @@ body {
 }
 /* end of cards */
 
+
+
+
 #reddit-image {
   margin-left: 10px;
   height: auto;
@@ -276,3 +283,4 @@ body {
   height: 80px;
   margin-bottom: -71px;
 };
+
