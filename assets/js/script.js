@@ -3,10 +3,13 @@
 var ba_formEl = $("#form");
 //input element
 var ba_stockInputEl = $("#search");
-// ticker element
-//var tickerEl = $('.ticker');
-// list element
-//listEl = $('.ticker__list');
+// swiper element
+var swiperContainer = $(".swiper-container");
+
+/*========Nafis Ticker Experiment======== */
+var tickerContainer = $('.ticker');
+/*========Nafis Ticker Experiment======== */
+
 
 // DATA
 
@@ -37,12 +40,12 @@ var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
 
 var possibleSymbols = [];
 
-getSymbols();
+
 var ba_favArr = [];
 
 ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
 
-console.log(ba_favArr);
+
 // FUNCTIONS
 
 $(function () {
@@ -82,58 +85,112 @@ function addFav(event) {
         if (!ba_favArr) {
           ba_favArr = [];
         }
-        ba_favArr.push(ba_stckSymb);
-        ba_strFavArr = JSON.stringify(ba_favArr);
-        localStorage.setItem("SavedStocks", ba_strFavArr);
+        if (ba_favArr.length < 5) {
+          ba_favArr.push(ba_stckSymb);
+          ba_strFavArr = JSON.stringify(ba_favArr);
+          localStorage.setItem("SavedStocks", ba_strFavArr);
+        } else {
+          ba_favArr.push(ba_stckSymb);
+          ba_favArr.shift();
+          ba_strFavArr = JSON.stringify(ba_favArr);
+          localStorage.setItem("SavedStocks", ba_strFavArr);
+        }
       }
     });
 }
 
-// TODO: (Nafis) function to fetch and parse stock prices
-
-// TODO: (Nafis) Write a function to render stock prices
-
-// clone = listEl.cloneNode(true)
-
-// tickerEl.append(clone)
-
-// USER INTERACTIONS
-
-// user submit stock form
-ba_formEl.on("submit", addFav);
-
-// DUNCAN
-
-var db_containerEl = $(".container");
-
-var db_priceEl = $(".stock-price");
-
-var db_requestUrl = "https://financialmodelingprep.com";
-
-//* DUNCAN
-
-function renderPrice(event) {
-  event.preventDefault();
-  var db_containerEl = db_priceEl.val();
-
-  var db_priceEl =
-    "https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86";
-  fetch(db_priceAPi)
+function getRedditPosts() {
+  var redditAPIURL = "https://www.reddit.com/r/finance/new.json?sort=hot"
+  fetch(redditAPIURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      localStorage.setItem(db_priceEl, db_containerEl);
-      renderPrice();
-    })
-    .then(function () {
-      localStorage.setItem(db_priceEl, db_containerEl);
-      renderPrice();
+      var swiperCards = swiperContainer.children().children();
+      var numOfTicker = 20;
+      for (var i = 0; i < numOfTicker; i++) {
+        var headingTitle = swiperCards.children().eq(2*i);
+        var pBody = swiperCards.children().eq(2*i + 1);
+        var postTitle = data.data.children[i].data.title;
+        var postBody = data.data.children[i].data.selftext;
+        headingTitle.text(postTitle.slice(0,50) + "...");
+        pBody.text( postBody.slice(0,100) + "...");
+
+        /*========Nafis Ticker Experiment======== */
+        var tickerPost = $('<div>').attr('class', 'ticker__item').text(postTitle.slice(0,50));
+        tickerContainer.append(tickerPost);
+
+        /*========Nafis Ticker Experiment======== */
+      }
     });
-  console.log(response);
 }
 
+var swiper = new Swiper(".mySwiper", {
+  slidesPerView: 3,
+  spaceBetween: 30,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
+
+// USER INTERACTIONS
+
+
+// user submit stock form
+ba_formEl.on("submit", addFav);
+
+// Initialization
+
+getSymbols();
+getRedditPosts();
+
+/*=============================
+DISPLAY STOCK PRICES - DUNCAN
+=============================*/
+
+// var db_apiUrl = `https://financialmodelingprep.com/api/v3/quote-short/${d_stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
+async function getPrice() {
+  var response = await fetch(db_apiUrl);
+  var data = await response.json();
+  var { price, volume } = data;
+  console.log(data);
+
+  // user submit stock form
+  ba_formEl.on("submit", addFav);
+}
+
+getPrice();
+
+function getStockData(stockTicker) {
+  var db_apiUrl = `https://financialmodelingprep.com/api/v3/quote-short/${stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
+  async function getPrice() {
+    var response = await fetch(db_apiUrl);
+    var data = await response.json();
+    var { price, volume } = data;
+    console.log(data);
+    return data;
+  }
+}
+
+  
+
+
 //fetch("https://financialmodelingprep.com/api/v3/stock/list?apikey=f4ffe18f8adcc3fc91a869983823de86")
+
+/*=============================
+DISPLAY STOCK PRICES - DUNCAN
+=============================*/
+
+
 
 /*=============================
 DISPLAY FINANCIAL NEWS - NAFIS
@@ -146,13 +203,13 @@ DEPENDENCIES
 var na_newsCards = $(".news-container");
 var na_newsSlides = $(".swiper-slide");
 var na_numNewsCardSlots = $(".news-card").length;
-var numArticleSlots = 3;
+var numArticleSlots = 1;
 
 /*==============
 DATA
 ==============*/
 
-var na_favStocks = ["AAPL", "GOOG", "WDC", "TSLA", "AMZN"];
+var na_favStocks = ["AAPL", "GOOG"];
 var na_numFavoriteStocks = na_favStocks.length;
 var na_APIKey = "4e48677e67d7cfd40210605712bdb9a0";
 var na_newsUrl = ""; 
@@ -191,7 +248,7 @@ function renderNewsCard(newsList, stockNum) {
       "background-image": `linear-gradient(to bottom, rgba(93, 34, 6, 0.53), rgba(17, 42, 86, 0.82)), url(${na_newsImageUrl})`,
       "background-size": "cover"
     });
-  ;}
+  };
 };
   
 function newsAPICall (numberOfArticlesLimit, stockTicker, stockNum) {
@@ -235,7 +292,7 @@ function removeEmptyStockCards (numStockCards, numStockSlots) {
 // };
 
 
-/*==============
+  /*==============
 INITIALIZATION
 ==============*/
 
