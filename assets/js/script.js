@@ -16,6 +16,7 @@ var tickerContainer = $('.ticker');
 var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
 var possibleSymbols = [];
 var ba_favArr = [];
+var infoArr = [];
 
 ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
 
@@ -39,7 +40,6 @@ function getSymbols() {
       for (var i = 0; i < data.length; i++) {
         possibleSymbols.push(data[i].symbol);
       }
-      console.log(possibleSymbols);
     });
 }
 
@@ -143,29 +143,56 @@ DISPLAY STOCK PRICES - DUNCAN
 // change 
 // change direct (+/-)
 
+
+// ==========================================================================================================================================================================
+
+// function takes in Stock Symbol as arguement and changes the content of infoArr which is a global variable. The order of the data in the array is [price, name, changes(up or down)].
+function renderstockdata(x) {
+  var profileURL = `https://financialmodelingprep.com/api/v3/profile/${x}?apikey=a0e84d4ecb7ba93551e1c9332dd5d530`
+  fetch(profileURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      stockPrice = data[0].price;
+      stockName = data[0].companyName;
+      stockChanges = data[0].changes;
+      infoArr.splice(0, infoArr.length)
+      infoArr.push(stockPrice);
+      infoArr.push(stockName);
+      infoArr.push(stockChanges);
+    });
+
+}
+
+// ==========================================================================================================================================================================
+
+renderstockdata("AAPL");
+console.log(infoArr);
+
 // var db_apiUrl = `https://financialmodelingprep.com/api/v3/quote-short/${d_stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
-async function getPrice() {
-  var response = await fetch(db_apiUrl);
-  var data = await response.json();
-  var { price, volume } = data;
-  console.log(data);
+// async function getPrice() {
+//   var response = await fetch(db_apiUrl);
+//   var data = await response.json();
+//   var { price, volume } = data;
+//   console.log(data);
 
-  // user submit stock form
-  ba_formEl.on("submit", addFav);
-}
+//   // user submit stock form
+//   ba_formEl.on("submit", addFav);
+// }
 
-// getPrice();
+// // getPrice();
 
-function getStockData(stockTicker) {
-  var db_apiUrl = `https://financialmodelingprep.com/api/v3/quote-short/${stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
-  async function getPrice() {
-    var response = await fetch(db_apiUrl);
-    var data = await response.json();
-    var { price, volume } = data;
-    console.log(data);
-    return data;
-  }
-}
+// function getStockData(stockTicker) {
+//   var db_apiUrl = `https://financialmodelingprep.com/api/v3/quote-short/${stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
+//   async function getPrice() {
+//     var response = await fetch(db_apiUrl);
+//     var data = await response.json();
+//     var { price, volume } = data;
+//     console.log(data);
+//     return data;
+//   }
+// }
 
   
 
