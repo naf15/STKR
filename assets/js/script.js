@@ -150,7 +150,7 @@ ba_formEl.on("submit", addFav);
 
 // Initialization
 
-getSymbols();
+// getSymbols();
 getRedditPosts();
 
 /*=============================
