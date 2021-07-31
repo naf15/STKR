@@ -85,13 +85,16 @@ function getRedditPosts() {
       for (var i = 0; i < numOfTicker; i++) {
         // var headingTitle = swiperCards.children().eq(2*i);
         // var pBody = swiperCards.children().eq(2*i + 1);
+        var postUrl = data.data.children[i].data.url;
         var postTitle = data.data.children[i].data.title;
         var postBody = data.data.children[i].data.selftext;
         // headingTitle.text(postTitle.slice(0,50) + "...");
         // pBody.text( postBody.slice(0,100) + "...");
 
         /*========Nafis Ticker Experiment======== */
-        var tickerPost = $('<div>').attr('class', 'ticker__item').text(postTitle.slice(0,50));
+        var tickerLink = $('<a>').attr('href',postUrl).attr('target','_blank').text(postTitle.slice(0,50)).css({'text-decoration':'none'});
+        var tickerPost = $('<div>').attr('class', 'ticker__item').append(tickerLink);
+        // var tickerPost = $('<div>').attr('class', 'ticker__item').text(postTitle.slice(0,50));
         tickerContainer.append(tickerPost);
 
         /*========Nafis Ticker Experiment======== */
@@ -142,7 +145,7 @@ async function getPrice() {
   ba_formEl.on("submit", addFav);
 }
 
-getPrice();
+// getPrice();
 
 function getStockData(stockTicker) {
   var db_apiUrl = `https://financialmodelingprep.com/api/v3/quote-short/${stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;

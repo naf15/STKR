@@ -226,6 +226,14 @@ body {
   font-size: 1.4rem;
 }
 
+.ticker__item a {
+  color: rgba(255, 82, 0, 0.76);
+};
+
+.ticker__item a:hover {
+  color: rgb(255, 81, 0);
+};
+
 #reddit-image {
   margin-left: 10px;
   height: auto;
