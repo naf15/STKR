@@ -144,18 +144,22 @@ DEPENDENCIES
 ==============*/
 
 var na_newsCards = $(".news-container");
+var na_newsSlides = $(".swiper-slide");
+var na_numNewsCardSlots = $(".news-card").length;
 
 /*==============
 DATA
 ==============*/
 
-var na_favStocks = ["AAPL", "GOOG", "GME", "WDC"];
+var na_favStocks = ["AAPL"];
 // var na_stockTicker = 'AAPL';
+var na_numFavoriteStocks = na_favStocks.length;
 var na_APIKey = "4e48677e67d7cfd40210605712bdb9a0";
 var na_newsUrl = ""; // `https://financialmodelingprep.com/api/v3/stock_news?tickers=${na_stockTicker}&limit=5&apikey=${na_APIKey}`;
-var na_stocksNewsArray = [];
+var na_stockNewsObject = {};
+var na_stocksNewsData = [];
 var na_favStocksString = "";
-var na_article_limit = na_favStocks.length * 3;
+var numberOfArticlesLimit = 2;
 
 /*==============
 FUNCTIONS
@@ -167,100 +171,187 @@ function stringifyFavStocks(list) {
     // Appends each stock ticker to a comma-separated string for API call
     stringifiedList += list[i] + ",";
   }
-  stringifiedList += list[length - 1];
+  stringifiedList += list[list.length - 1];
+  console.log(stringifiedList)
   return stringifiedList;
 }
 
 function renderFaveStockCards() {
+  // for (var i = 0; i < na_favStocks.length; i++) {
+  //   var na_stockTicker = na_favStocks[i];
+
+    
+  for (var i = 0; i < na_stocksNewsData.length; i++) {
+    var na_stockNews = na_stocksNewsData[i];
+
+    if (!na_stockNewsObject[na_stockNews.symbol]) {
+      na_stockNewsObject[na_stockNews.symbol] = [];
+    };
+
+    na_stockNewsObject[na_stockNews.symbol].push({title : na_stockNews.title, text : na_stockNews.text, image : na_stockNews.image});
+
+      
+
+
+      // if (na_stockNews.symbol === na_stockTicker) {
+      //   console.log(na_stockNews);
+      //   renderNewsCard(na_stockNews);
+      // }
+  }
+  console.log(na_stockNewsObject);
+  
+  //na_stockNewsObject[stock] = [{}];
+
+  // }
+
+
   for (var i = 0; i < na_favStocks.length; i++) {
     var na_stockTicker = na_favStocks[i];
-
-    for (var j = 0; j < na_stocksNewsArray.length; j++) {
-      var na_stockNews = na_stocksNewsArray[j];
-
-      if (na_stockNews.symbol === na_stockTicker) {
-        console.log(na_stockNews);
-        renderNewsCard(na_stockNews);
-      }
-    }
+    console.log(na_stockTicker);
+    console.log(na_stockNewsObject[na_stockTicker]);
+    renderNewsCard(na_stockNewsObject[na_stockTicker]);
   }
+
 }
 
-function renderNewsCard(stockData) {
-  var na_card = $("<div>");
-  var na_cardNewsTitle = $("<h2>");
-  var na_cardNewsText = $("<p>");
-  var na_newsImageUrl = stockData.image;
-  var na_stockNewsTitle = stockData.title;
-  var na_stockNewsText = stockData.text;
 
-  na_card.attr("class", "news-card");
+function renderNewsCard(newsList) {
+  var na_newsCard = $("<div>").attr("class", "news-card");
+  var swiperContainer = $("<div>").attr("class", "swiper-container mySwiper");
+  var swiperWrapper = $("<div>").attr("class", "swiper-wrapper");
+  var swiperButtonNext = $("<div>").attr("class", "swiper-button-next");
+  var swiperButtonPrev = $("<div>").attr("class", "swiper-button-prev");
+  var swiperPagination = $("<div>").attr("class", "swiper-pagination");
+  var numArticles = newsList.length;
+  
+  for (var i=0; i<numArticles; i++) {
+    var newSlide = $("<div>").attr("class", "swiper-slide"); 
+    var na_cardNewsTitle = $("<h2>");
+    var na_cardNewsText = $("<p>");
+    var stockNewsData = newsList[i];
+    var na_newsImageUrl = stockNewsData.image;
+    var na_stockNewsTitle = stockNewsData.title;
+    var na_stockNewsText = stockNewsData.text;
 
-  na_card.css({
-    "background-image": `linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.53)), url(${na_newsImageUrl})`,
-    width: "600px",
-    height: "400px",
-    "background-size": "cover",
-    color: "white",
-    padding: "20px",
-    margin: "10px",
-    "border-bottom-right-radius": "5px",
-    "border-bottom-left-radius": "5px",
-    "box-shadow": "5px 5px 15px rgba(0, 0, 0, 0.897)",
-  });
+    newSlide.css({
+      "background-image": `linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.53)), url(${na_newsImageUrl})`,
+      width: "600px",
+      height: "400px",
+      "background-size": "cover",
+      color: "white",
+      padding: "20px",
+      margin: "10px",
+      "border-bottom-right-radius": "5px",
+      "border-bottom-left-radius": "5px",
+      "box-shadow": "5px 5px 15px rgba(0, 0, 0, 0.897)",
+    });
+      
+    na_cardNewsTitle.text(na_stockNewsTitle);
+    na_cardNewsText.text(na_stockNewsText);
+    console.dir(na_newsCard);
+        
+    newSlide.append(na_cardNewsTitle);
+    newSlide.append(na_cardNewsText);
+    swiperWrapper.append(newSlide);
 
-  // "height": "200px", "background-image": `url(${na_newsImageUrl})`, "font-size": "200%"});
-
-  na_cardNewsTitle.text(na_stockNewsTitle);
-  na_cardNewsText.text(na_stockNewsText);
-  console.dir(na_card);
-
-  na_newsCards.append(na_card);
-  na_card.append(na_cardNewsTitle);
-  na_card.append(na_cardNewsText);
+    console.log(na_newsSlides[0])
+    na_newsSlides.first().css({
+      "background-image": `linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.53)), url(${na_newsImageUrl})`,
+      "background-size": "cover"
+    });
+  }
+  
+  // color: "white",
+  // padding: "20px",
+  // margin: "10px",
+  // "border-bottom-right-radius": "5px",
+  // "border-bottom-left-radius": "5px",
+  // "box-shadow": "5px 5px 15px rgba(0, 0, 0, 0.897)",
+  // swiperContainer.append(swiperWrapper);
+  // swiperContainer.append(swiperButtonNext);
+  // swiperContainer.append(swiperButtonPrev);
+  // swiperContainer.append(swiperPagination);
+  // na_newsCard.append(swiperContainer);
+  // na_newsCards.append(na_newsCard);
 }
+
+
+
+var swiper = new Swiper(".mySwiper", {
+  cssMode: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  pagination: {
+    el: ".swiper-pagination",
+  },
+  mousewheel: true,
+  keyboard: true,
+});
 
 // Carousel
 
-// var slideIndex = 1;
-// showDivs(slideIndex);
+function newsAPICall (numberOfArticlesLimit, stockTicker) {
+  na_newsUrl = `https://financialmodelingprep.com/api/v3/stock_news?tickers=${stockTicker}&limit=${numberOfArticlesLimit}&apikey=${na_APIKey}`;
 
-// function plusDivs(n) {
-//   showDivs(slideIndex += n);
-// }
-
-// function showDivs(n) {
-//   var i;
-//   var x = document.getElementsByClassName("mySlides");
-//   if (n > x.length) {slideIndex = 1}
-//   if (n < 1) {slideIndex = x.length} ;
-//   for (i = 0; i < x.length; i++) {
-//     x[i].style.display = "none";
-//   }
-//   x[slideIndex-1].style.display = "block";
-// }
-
-// Carousel
-
-/*==============
-INITIALIZATION
-==============*/
-
-na_favStocksString = stringifyFavStocks(na_favStocks);
-na_newsUrl = `https://financialmodelingprep.com/api/v3/stock_news?tickers=${na_favStocksString}&limit=${na_article_limit}&apikey=${na_APIKey}`;
-
-fetch(na_newsUrl)
+  fetch(na_newsUrl)
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     console.log("Fetch Response \n-------------");
     console.log(data);
-    na_stocksNewsArray = data; 
-    console.log(na_stocksNewsArray);
-    renderFaveStockCards();
+    na_stocksNewsData = data; 
+    console.log(na_stocksNewsData);
+    renderNewsCard(na_stocksNewsData);
   });
+}
 
-na_newsCards.on("click", ".news-card", function () {
-  console.log("open new tab");
-});
+function renderStockCards (favoriteStocks) {
+  for (var i=0 ; i<favoriteStocks.length; i++) {
+    newsAPICall(numberOfArticlesLimit, favoriteStocks[i]);
+  };
+};
+
+function removeEmptyStockCards (numStockCards, numStockSlots) {
+  for (var i=numStockCards+1; i<=numStockSlots; i++) {
+    $('#stock-card-'+i).remove();
+  };
+};
+
+function removeEmptySlides (numArticles, numArticleSlots) {
+  for (var i=numArticle+1; i<=numArticleSlots; i++) {
+    $('#stock-card-'+i).remove();
+  };
+};
+
+
+/*==============
+INITIALIZATION
+==============*/
+
+renderStockCards(na_favStocks);
+removeEmptyStockCards (na_numFavoriteStocks, na_numNewsCardSlots);
+
+// na_article_limit = 2;
+
+// na_favStocksString = stringifyFavStocks(na_favStocks);
+
+// console.log(na_article_limit);
+
+// fetch(na_newsUrl)
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     console.log("Fetch Response \n-------------");
+//     console.log(data);
+//     na_stocksNewsData = data; 
+//     console.log(na_stocksNewsData);
+//     renderFaveStockCards();
+//   });
+
+// na_newsCards.on("click", ".news-card", function () {
+//   console.log("open new tab");
+// });
