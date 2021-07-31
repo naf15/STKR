@@ -197,6 +197,7 @@ body {
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.897);
   display: flex;
   align-items: center;
+  /* background-color: #05192dea; */
 }
 
 .ticker {

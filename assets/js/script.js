@@ -14,33 +14,7 @@ var tickerContainer = $('.ticker');
 // DATA
 
 var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
-
-// var ba_availableTags = [
-//   "AAPL",
-//   "MSFT",
-//   "GOOG",
-//   "GOOGL",
-//   "AMZN",
-//   "FB",
-//   "TSLA",
-//   "NVDA",
-//   "PYPL",
-//   "ASML",
-//   "ADBE",
-//   "CMCSA",
-//   "CSCO",
-//   "NFLX",
-//   "PEP",
-//   "INTC",
-//   "AVGO",
-//   "COST",
-//   "TMUS",
-//   "TXN",
-// ];
-
 var possibleSymbols = [];
-
-
 var ba_favArr = [];
 
 ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
@@ -84,7 +58,7 @@ function addFav(event) {
       if (data.length > 0) {
         if (!ba_favArr) {
           ba_favArr = [];
-        }
+        };
         if (ba_favArr.length < 5) {
           ba_favArr.push(ba_stckSymb);
           ba_strFavArr = JSON.stringify(ba_favArr);
@@ -94,10 +68,10 @@ function addFav(event) {
           ba_favArr.shift();
           ba_strFavArr = JSON.stringify(ba_favArr);
           localStorage.setItem("SavedStocks", ba_strFavArr);
-        }
-      }
+        };
+      };
     });
-}
+};
 
 function getRedditPosts() {
   var redditAPIURL = "https://www.reddit.com/r/finance/new.json?sort=hot"
@@ -106,15 +80,15 @@ function getRedditPosts() {
       return response.json();
     })
     .then(function (data) {
-      var swiperCards = swiperContainer.children().children();
+      // var swiperCards = swiperContainer.children().children();
       var numOfTicker = 20;
       for (var i = 0; i < numOfTicker; i++) {
-        var headingTitle = swiperCards.children().eq(2*i);
-        var pBody = swiperCards.children().eq(2*i + 1);
+        // var headingTitle = swiperCards.children().eq(2*i);
+        // var pBody = swiperCards.children().eq(2*i + 1);
         var postTitle = data.data.children[i].data.title;
         var postBody = data.data.children[i].data.selftext;
-        headingTitle.text(postTitle.slice(0,50) + "...");
-        pBody.text( postBody.slice(0,100) + "...");
+        // headingTitle.text(postTitle.slice(0,50) + "...");
+        // pBody.text( postBody.slice(0,100) + "...");
 
         /*========Nafis Ticker Experiment======== */
         var tickerPost = $('<div>').attr('class', 'ticker__item').text(postTitle.slice(0,50));
@@ -209,13 +183,13 @@ var numArticleSlots = 1;
 DATA
 ==============*/
 
-var na_favStocks = ["AAPL", "GOOG"];
+var na_favStocks = ["AAPL"];
 var na_numFavoriteStocks = na_favStocks.length;
 var na_APIKey = "4e48677e67d7cfd40210605712bdb9a0";
 var na_newsUrl = ""; 
 var na_stocksNewsData = [];
 var na_favStocksString = "";
-var numberOfArticlesLimit = 2;
+var numberOfArticlesLimit = 1; //defauly to 3
 
 /*==============
 FUNCTIONS
@@ -282,15 +256,6 @@ function removeEmptyStockCards (numStockCards, numStockSlots) {
     $('#stock-card-'+i).remove();
   };
 };
-
-// Code below displays correctly only if you inspect
-
-// function removeEmptySlides (numArticles, numArticleSlots, stockNum) {
-//   for (var i=numArticles+1; i<=numArticleSlots; i++) {
-//     $('#slide-' + stockNum + '-' + i).remove();
-//   };
-// };
-
 
   /*==============
 INITIALIZATION
