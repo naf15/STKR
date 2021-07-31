@@ -72,12 +72,12 @@ body {
   height: 100%;
 }
 
-.swiper-slide {
+/* .swiper-slide {
   text-align: center;
   font-size: 18px;
   background: #fff;
 
-  /* Center slide text vertically */
+ 
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -90,7 +90,7 @@ body {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-}
+} */
 
 .swiper-slide img {
   display: block;
@@ -233,8 +233,8 @@ body {
   animation-timing-function: linear;
   -webkit-animation-name: ticker;
   animation-name: ticker;
-  -webkit-animation-duration: 30s;
-  animation-duration:30s;
+  -webkit-animation-duration: 60s; /* 30s */
+  animation-duration: 60s;  /* 30s */
 }
 
 .ticker__item {
