@@ -22,7 +22,43 @@ var infoObj = {
   stocksymbol: "",
 };
 
-ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
+// ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
+
+/*==================
+NAFIS DEPENDENCIES
+===================*/
+
+var na_newsCards = $(".news-container");
+var na_newsSlides = $(".swiper-slide");
+var na_numNewsCardSlots = $(".news-card").length;
+var numArticleSlots = 1;
+
+/*==================
+NAFIS DEPENDENCIES
+===================*/
+
+/*==============
+NAFIS DATA
+==============*/
+getFav()
+var zzz = JSON.parse(localStorage.getItem("SavedStocks"))
+console.log(zzz)
+
+console.log(ba_favArr);
+//var na_favStocks = ba_favArr;
+// var na_numFavoriteStocks = ba_favArr.length;
+var na_APIKey = "4e48677e67d7cfd40210605712bdb9a0";
+var na_newsUrl = "";
+var na_stocksNewsData = [];
+var na_favStocksString = "";
+var numberOfArticlesLimit = 1; //defauly to 3
+
+/*==============
+NAFIS DATA
+==============*/
+
+
+
 
 // FUNCTIONS
 
@@ -47,10 +83,13 @@ function getSymbols() {
 }
 
 function getFav() {
+  console.log(ba_favArr)
   if (!localStorage.getItem("SavedStocks")) {
     ba_favArr = [];
+    console.log(ba_favArr);
   } else {
-    ba_favArr = localStorage.getItem("SavedStocks");
+    ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
+    console.log(ba_favArr);
   }
 }
 
@@ -66,15 +105,18 @@ function addFav(event) {
     .then(function (data) {
       console.log(data);
       if (data.length > 0) {
+        console.log(ba_favArr)
         if (!ba_favArr) {
           ba_favArr = [];
         }
         if (!ba_favArr.includes(ba_stckSymb)) {
+          console.log(ba_favArr)
           if (ba_favArr.length < 5) {
             ba_favArr.push(ba_stckSymb);
             ba_strFavArr = JSON.stringify(ba_favArr);
             localStorage.setItem("SavedStocks", ba_strFavArr);
           } else {
+            console.log(ba_favArr) 
             ba_favArr.push(ba_stckSymb);
             ba_favArr.shift();
             ba_strFavArr = JSON.stringify(ba_favArr);
@@ -82,6 +124,13 @@ function addFav(event) {
           }
         }
       }
+      getFav();
+      clearStockCards();
+    
+      //resetStockCards(na_numNewsCardSlots);
+      resetStockCards(5);
+      renderStockCards(ba_favArr);
+      removeEmptyStockCards(ba_favArr.length, na_numNewsCardSlots);
     });
 }
 
@@ -140,11 +189,7 @@ var swiper = new Swiper(".mySwiper", {
 // USER INTERACTIONS
 
 // user submit stock form
-ba_formEl.on("submit", function (event) {
-  addFav(event);
-  renderStockCards(na_favStocks);
-  removeEmptyStockCards(na_numFavoriteStocks, na_numNewsCardSlots);
-});
+
 
 // Initialization
 
@@ -166,8 +211,8 @@ DISPLAY STOCK PRICES - DUNCAN
 
 // ==========================================================================================================================================================================
 
-function renderstockdata(x) {
-  var profileURL = `https://financialmodelingprep.com/api/v3/profile/${x}?apikey=a0e84d4ecb7ba93551e1c9332dd5d530`;
+function getStockDataContent(stockSymbol, stockNum) {
+  var profileURL = `https://financialmodelingprep.com/api/v3/profile/${stockSymbol}?apikey=a0e84d4ecb7ba93551e1c9332dd5d530`;
   fetch(profileURL)
     .then(function (response) {
       return response.json();
@@ -181,13 +226,14 @@ function renderstockdata(x) {
       infoObj.name = stockName;
       infoObj.change = stockChanges;
       infoObj.stockSymbol = stockSymb;
+      renderInfoCard(infoObj, stockNum);
     });
 }
 
 // ==========================================================================================================================================================================
 
-renderstockdata("AAPL");
-console.log(infoObj);
+// getStockDataContent("AAPL");
+// console.log(infoObj);
 
 // var db_apiUrl = `https://financialmodelingprep.com/api/v3/quote-short/${d_stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
 // async function getPrice() {
@@ -223,27 +269,7 @@ DISPLAY STOCK PRICES - DUNCAN
 DISPLAY FINANCIAL NEWS - NAFIS
 =============================*/
 
-/*==============
-DEPENDENCIES
-==============*/
 
-var na_newsCards = $(".news-container");
-var na_newsSlides = $(".swiper-slide");
-var na_numNewsCardSlots = $(".news-card").length;
-var numArticleSlots = 1;
-
-/*==============
-DATA
-==============*/
-
-console.log(ba_favArr);
-var na_favStocks = ["AAPL", "WDC"];
-var na_numFavoriteStocks = na_favStocks.length;
-var na_APIKey = "4e48677e67d7cfd40210605712bdb9a0";
-var na_newsUrl = "";
-var na_stocksNewsData = [];
-var na_favStocksString = "";
-var numberOfArticlesLimit = 1; //defauly to 3
 
 /*==============
 FUNCTIONS
@@ -252,8 +278,8 @@ FUNCTIONS
 function renderInfoCard(stockInfo, stockNum) {
   var price = stockInfo.price;
   var priceChange = stockInfo.change;
-  var symbol = stockInfo.symbol;
-  var companyName = "(" + stockInfo.companyName + ")";
+  var symbol = stockInfo.stockSymbol;
+  var companyName = "(" + stockInfo.name + ")";
   var stockInfoContainer = $("#stock-info-card-" + stockNum);
 
   var leftDiv = $("<div>").css({
@@ -343,7 +369,7 @@ function renderNewsCard(newsList, stockNum) {
   }
 }
 
-function newsAPICall(numberOfArticlesLimit, stockTicker, stockNum) {
+function getStockNewsContent(numberOfArticlesLimit, stockTicker, stockNum) {
   na_newsUrl = `https://financialmodelingprep.com/api/v3/stock_news?tickers=${stockTicker}&limit=${numberOfArticlesLimit}&apikey=${na_APIKey}`;
 
   fetch(na_newsUrl)
@@ -366,25 +392,48 @@ function renderStockCards(favoriteStocks) {
     var stockNum = i + 1;
     var currentStock = favoriteStocks[i];
     console.log(currentStock);
-    newsAPICall(numberOfArticlesLimit, currentStock, stockNum);
-    renderInfoCard(
-      {
-        price: 250,
-        change: -50,
-        up: true,
-        companyName: "Apple Inc.",
-        symbol: "AAPL",
-      },
-      stockNum
-    );
+    getStockNewsContent(numberOfArticlesLimit, currentStock, stockNum);
+    getStockDataContent(currentStock, stockNum);
+    
+  }
+}
+
+function resetStockCards(numStockSlots) {
+  for (var i=1; i <= numStockSlots; i++) {
+    // $("#stock-card-" + i).remove();
+    //$("#stock-card-" + i).css({'display':'block'})
+    $("#stock-card-" + i).show();
+    console.log($("#stock-card-" + i))
   }
 }
 
 function removeEmptyStockCards(numStockCards, numStockSlots) {
   for (var i = numStockCards + 1; i <= numStockSlots; i++) {
-    $("#stock-card-" + i).remove();
+    // $("#stock-card-" + i).remove();
+    // $("#stock-card-" + i).css({'display':'none'})
+    $("#stock-card-" + i).hide();
   }
 }
+
+function clearStockCards() {
+  for (var i=1; i<=ba_favArr.length; i++) {
+    var currentStockInfoCard = $(`#stock-info-card-${i}`);
+    
+    currentStockInfoCard.children().each(function () {
+      this.remove();
+    });  
+    // removes stock-info-cards
+    
+    for (var j=1; j<=numberOfArticlesLimit; j++) {
+      var currentStockNewsArticle = $(`#slide-${i}-${j}`);
+      currentStockNewsArticle.children().each(function () {
+      this.remove();
+    });   
+    
+    // removes stock-news-card
+    };
+  };
+};
 
 /*==============
 INITIALIZATION
@@ -406,7 +455,16 @@ var swiper = new Swiper(".mySwiper", {
 });
 
 // Carousel
+clearStockCards();
+resetStockCards(na_numNewsCardSlots);
+renderStockCards(ba_favArr);
+console.log(ba_favArr.length + " " + na_numNewsCardSlots);
+removeEmptyStockCards(ba_favArr.length, na_numNewsCardSlots);
 
-renderStockCards(na_favStocks);
-console.log(na_numFavoriteStocks + " " + na_numNewsCardSlots);
-removeEmptyStockCards(na_numFavoriteStocks, na_numNewsCardSlots);
+
+ba_formEl.on("submit", function (event) {
+  addFav(event); //API
+
+  console.log(na_numNewsCardSlots)
+  console.log(ba_favArr)
+});
