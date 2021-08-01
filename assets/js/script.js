@@ -207,6 +207,16 @@ var numberOfArticlesLimit = 1; //defauly to 3
 FUNCTIONS
 ==============*/
 
+
+function renderInfoCard (stockInfo) {
+  var price = stockInfo.price;
+  var change = stockInfo.change;
+  var symbol = stockInfo.symbol;
+  var companyName = stockInfo.companyName;
+
+
+}
+
 function renderNewsCard(newsList, stockNum) {
   var numArticles = newsList.length;
   
@@ -257,9 +267,14 @@ function newsAPICall (numberOfArticlesLimit, stockTicker, stockNum) {
 
 function renderStockCards (favoriteStocks) {
   for (var i=0 ; i<favoriteStocks.length; i++) {
-    console.log(favoriteStocks[i])
-    newsAPICall(numberOfArticlesLimit, favoriteStocks[i], i+1);
+    var currentStock = favoriteStocks[i] 
+    console.log(currentStock)
+    newsAPICall(numberOfArticlesLimit, currentStock, i+1);
     //removeEmptySlides (numArticles, numArticleSlots, i+1);
+    
+    //priceAPICall() // includes below at the bottom 
+    //renderInfoCard(currentStock)
+    renderInfoCard({price: 250, change: -50, up: true, companyName: "Apple Inc.", symbol: "AAPL" })
   };
 };
 
@@ -269,7 +284,7 @@ function removeEmptyStockCards (numStockCards, numStockSlots) {
   };
 };
 
-  /*==============
+/*==============
 INITIALIZATION
 ==============*/
 
