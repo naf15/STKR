@@ -82,12 +82,49 @@ body {
 
 /* Nafis css */
 
- #news-container {
+ #stocks-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
 } 
+
+.info-card {
+  width: 632px;
+  height: 107px;
+  box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+  margin: 5%;
+  margin-bottom: -3%;
+  background-color: #000000c4;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-card, 
+.info-card * {
+  color: white;
+}
+
+.info-card p {
+  font-size: 16px;
+  font-weight: 100;
+  line-height: 1.4;
+}
+
+.info-card h2 {
+  font-size: xx-large;
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.info-card h3 {
+  font-size: xx-large;
+  text-transform: uppercase;
+  font-weight: 100;
+  line-height: 1.2;
+}
 
 .news-card {
   width: 700px;

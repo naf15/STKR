@@ -213,7 +213,7 @@ DISPLAY FINANCIAL NEWS - NAFIS
 DEPENDENCIES
 ==============*/
 
-var na_newsCards = $(".news-container");
+var stocksContainer = $(".stocks-container"); //not needed?
 var na_newsSlides = $(".swiper-slide");
 var na_numNewsCardSlots = $(".news-card").length;
 var numArticleSlots = 1;
@@ -222,26 +222,73 @@ var numArticleSlots = 1;
 DATA
 ==============*/
 
-var na_favStocks = ["AAPL"];
+var na_favStocks = ["AAPL", "GOOG", "WDC"];
 var na_numFavoriteStocks = na_favStocks.length;
 var na_APIKey = "4e48677e67d7cfd40210605712bdb9a0";
 var na_newsUrl = ""; 
 var na_stocksNewsData = [];
 var na_favStocksString = "";
-var numberOfArticlesLimit = 1; //defauly to 3
+var numberOfArticlesLimit = 3; //defauly to 3
 
 /*==============
 FUNCTIONS
 ==============*/
 
 
-function renderInfoCard (stockInfo) {
+function renderInfoCard (stockInfo, stockNum) {
   var price = stockInfo.price;
-  var change = stockInfo.change;
+  var priceChange = stockInfo.change;
   var symbol = stockInfo.symbol;
-  var companyName = stockInfo.companyName;
+  var companyName = '('+ stockInfo.companyName + ')';
+  var stockInfoContainer = $('#stock-info-card-'+ stockNum);
+  
+  var leftDiv = $('<div>').css({
+    width: '50%',
+    display: 'flex',
+    'justify-content': 'flex-start',
+    'align-items': 'center'
+  });
+  var rightDiv = $('<div>').css({
+    'width': '13%',
+    'display': 'flex',
+    'flex-direction': 'column',
+    'justify-content': 'space-between',
+    'align-items': 'center'
+  });
 
+  var symbolElement = $('<h2>').text(symbol);  
+  var companyNameElement = $('<h3>').css({'font-weight':'100'}).text(companyName);
+  var priceElement = $('<p>').text(price).css({
+    'color': 'rgb(255, 255, 255)',
+    'width': '100%',
+    'display': 'flex',
+    'height': '50%',
+    'justify-content': 'center',
+    'align-items': 'center',
+    'font-size': 'large'
+  });
+  var priceChangeElement = $('<p>').text(priceChange).css({
+    'color': 'rgb(255, 255, 255)',
+    'background-color': 'rgb(255, 0, 0)',
+    'width': '100%',
+    'display': 'flex',
+    'height': '50%',
+    'justify-content': 'center',
+    'align-items': 'center',
+    'border-radius': '3px',
+    'font-size': 'large'
+  });
 
+  if (priceChange >= 0) {
+    priceChangeElement.css({'background-color':'green'});
+  } else {
+    priceChangeElement.css({'background-color':'red'}) 
+  }
+  
+  leftDiv.append(symbolElement).append(companyNameElement);
+  rightDiv.append(priceElement).append(priceChangeElement);
+  
+  stockInfoContainer.append(leftDiv).append(rightDiv);
 }
 
 function renderNewsCard(newsList, stockNum) {
@@ -295,13 +342,14 @@ function newsAPICall (numberOfArticlesLimit, stockTicker, stockNum) {
 function renderStockCards (favoriteStocks) {
   for (var i=0 ; i<favoriteStocks.length; i++) {
     var currentStock = favoriteStocks[i] 
+    var stockNum = i+1
     console.log(currentStock)
-    newsAPICall(numberOfArticlesLimit, currentStock, i+1);
+    newsAPICall(numberOfArticlesLimit, currentStock, stockNum );
     //removeEmptySlides (numArticles, numArticleSlots, i+1);
     
     //priceAPICall() // includes below at the bottom 
     //renderInfoCard(currentStock)
-    renderInfoCard({price: 250, change: -50, up: true, companyName: "Apple Inc.", symbol: "AAPL" })
+    renderInfoCard({price: 250, change: -50, up: true, companyName: "Apple Inc.", symbol: "AAPL" }, stockNum)
   };
 };
 
