@@ -16,7 +16,12 @@ var tickerContainer = $('.ticker');
 var ba_finModPrepBaseURL = "https://financialmodelingprep.com";
 var possibleSymbols = [];
 var ba_favArr = [];
-var infoArr = [];
+var infoObj = {
+  price: 0,
+  name: "",
+  change: 0,
+  stocksymbol: "",
+};
 
 ba_favArr = JSON.parse(localStorage.getItem("SavedStocks"));
 
@@ -41,6 +46,14 @@ function getSymbols() {
         possibleSymbols.push(data[i].symbol);
       }
     });
+}
+
+function getFav() {
+  if (!localStorage.getItem("SavedStocks")) {
+    ba_favArr = [];
+  } else {
+    ba_favArr = localStorage.getItem("SavedStocks");
+  }
 }
 
 function addFav(event) {
@@ -123,7 +136,11 @@ var swiper = new Swiper(".mySwiper", {
 
 
 // user submit stock form
-ba_formEl.on("submit", addFav);
+ba_formEl.on("submit", function (event) {
+  addFav(event);
+  renderStockCards(na_favStocks);
+  removeEmptyStockCards (na_numFavoriteStocks, na_numNewsCardSlots);
+});
 
 // Initialization
 
@@ -146,7 +163,6 @@ DISPLAY STOCK PRICES - DUNCAN
 
 // ==========================================================================================================================================================================
 
-// function takes in Stock Symbol as arguement and changes the content of infoArr which is a global variable. The order of the data in the array is [price, name, changes(up or down)].
 function renderstockdata(x) {
   var profileURL = `https://financialmodelingprep.com/api/v3/profile/${x}?apikey=a0e84d4ecb7ba93551e1c9332dd5d530`
   fetch(profileURL)
@@ -157,18 +173,18 @@ function renderstockdata(x) {
       stockPrice = data[0].price;
       stockName = data[0].companyName;
       stockChanges = data[0].changes;
-      infoArr.splice(0, infoArr.length)
-      infoArr.push(stockPrice);
-      infoArr.push(stockName);
-      infoArr.push(stockChanges);
+      stockSymb = data[0].symbol;
+      infoObj.price = stockPrice;
+      infoObj.name = stockName;
+      infoObj.change = stockChanges;
+      infoObj.stockSymbol = stockSymb;
     });
-
-}
+};
 
 // ==========================================================================================================================================================================
 
 renderstockdata("AAPL");
-console.log(infoArr);
+console.log(infoObj);
 
 // var db_apiUrl = `https://financialmodelingprep.com/api/v3/quote-short/${d_stockTicker}?apikey=f4ffe18f8adcc3fc91a869983823de86`;
 // async function getPrice() {
@@ -222,7 +238,8 @@ var numArticleSlots = 1;
 DATA
 ==============*/
 
-var na_favStocks = ["AAPL"];
+console.log(ba_favArr)
+var na_favStocks = ["AAPL", "WDC"];
 var na_numFavoriteStocks = na_favStocks.length;
 var na_APIKey = "4e48677e67d7cfd40210605712bdb9a0";
 var na_newsUrl = ""; 
@@ -235,13 +252,60 @@ FUNCTIONS
 ==============*/
 
 
-function renderInfoCard (stockInfo) {
+function renderInfoCard (stockInfo, stockNum) {
   var price = stockInfo.price;
-  var change = stockInfo.change;
+  var priceChange = stockInfo.change;
   var symbol = stockInfo.symbol;
-  var companyName = stockInfo.companyName;
+  var companyName = '('+ stockInfo.companyName + ')';
+  var stockInfoContainer = $('#stock-info-card-'+ stockNum);
+  
+  var leftDiv = $('<div>').css({
+    width: '50%',
+    display: 'flex',
+    'justify-content': 'flex-start',
+    'align-items': 'center'
+  });
+  var rightDiv = $('<div>').css({
+    'width': '13%',
+    'display': 'flex',
+    'flex-direction': 'column',
+    'justify-content': 'space-between',
+    'align-items': 'center'
+  });
 
+  var symbolElement = $('<h2>').text(symbol);  
+  var companyNameElement = $('<h3>').css({'font-weight':'100'}).text(companyName);
+  var priceElement = $('<p>').text(price).css({
+    'color': 'rgb(255, 255, 255)',
+    'width': '100%',
+    'display': 'flex',
+    'height': '50%',
+    'justify-content': 'center',
+    'align-items': 'center',
+    'font-size': 'large'
+  });
+  var priceChangeElement = $('<p>').text(priceChange).css({
+    'color': 'rgb(255, 255, 255)',
+    'background-color': 'rgb(255, 0, 0)',
+    'width': '100%',
+    'display': 'flex',
+    'height': '50%',
+    'justify-content': 'center',
+    'align-items': 'center',
+    'border-radius': '3px',
+    'font-size': 'large'
+  });
 
+  if (priceChange >= 0) {
+    priceChangeElement.css({'background-color':'green'});
+  } else {
+    priceChangeElement.css({'background-color':'red'}) 
+  }
+  
+  leftDiv.append(symbolElement).append(companyNameElement);
+  rightDiv.append(priceElement).append(priceChangeElement);
+  
+  stockInfoContainer.append(leftDiv).append(rightDiv);
 }
 
 function renderNewsCard(newsList, stockNum) {
@@ -294,14 +358,11 @@ function newsAPICall (numberOfArticlesLimit, stockTicker, stockNum) {
 
 function renderStockCards (favoriteStocks) {
   for (var i=0 ; i<favoriteStocks.length; i++) {
+    var stockNum = i+1
     var currentStock = favoriteStocks[i] 
     console.log(currentStock)
-    newsAPICall(numberOfArticlesLimit, currentStock, i+1);
-    //removeEmptySlides (numArticles, numArticleSlots, i+1);
-    
-    //priceAPICall() // includes below at the bottom 
-    //renderInfoCard(currentStock)
-    renderInfoCard({price: 250, change: -50, up: true, companyName: "Apple Inc.", symbol: "AAPL" })
+    newsAPICall(numberOfArticlesLimit, currentStock, stockNum);
+    renderInfoCard({price: 250, change: -50, up: true, companyName: "Apple Inc.", symbol: "AAPL" }, stockNum)
   };
 };
 

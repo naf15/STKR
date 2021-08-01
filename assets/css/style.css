@@ -82,12 +82,29 @@ body {
 
 /* Nafis css */
 
- #news-container {
+ #stocks-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
 } 
+
+.info-card {
+  width: 632px;
+  height: 107px;
+  box-shadow: 2px 2px 2px rgb(0 0 0 / 90%);
+  margin: 5%;
+  margin-bottom: -3%;
+  background-color: #000000c4;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-card, .info-card * {
+  color: white;
+}
+
 
 .news-card {
   width: 700px;
