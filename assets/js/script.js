@@ -44,7 +44,7 @@ var swiper = new Swiper(".mySwiper", {
 });
 
 
-var APIKey = "27d18dfa6008d8813f28e135a784423a";
+var APIKey = "0fec86e191459990b6ae6e3c462bcc8d";
 var newsURL = "";
 var stocksNewsData = [];
 var numberOfArticlesLimit = 3; //defauly to 3
@@ -150,9 +150,11 @@ function getStockDataContent(stockSymbol, stockNum) {
   var profileURL = `https://financialmodelingprep.com/api/v3/profile/${stockSymbol}?apikey=${APIKey}`;
   fetch(profileURL)
     .then(function (response) {
+      console.log("URL works");
       return response.json();
     })
     .then(function (data) {
+      console.log(data);
       stockPrice = data[0].price;
       stockName = data[0].companyName;
       stockChanges = data[0].changes;
@@ -238,7 +240,7 @@ function renderNewsCard(newsList, stockNum) {
     var stockNewsData = newsList[i];
     var newsImageUrl = stockNewsData.image;
     var stockNewsTitle = stockNewsData.title;
-    var stockNewsText = stockNewsData.text;
+    var stockNewsText = stockNewsData.text.slice(0,250) + "...";
 
     cardNewsTitle.text(stockNewsTitle);
     cardNewsText.text(stockNewsText);
@@ -327,8 +329,7 @@ formEl.on("submit", function (event) {
 INITIALIZATION
 ==============*/
 
-
-getFav()
+getFav();
 getSymbols();
 getRedditPosts();
 clearStockCards();
