@@ -51,7 +51,7 @@ var na_APIKey = "4e48677e67d7cfd40210605712bdb9a0";
 var na_newsUrl = "";
 var na_stocksNewsData = [];
 var na_favStocksString = "";
-var numberOfArticlesLimit = 1; //defauly to 3
+var numberOfArticlesLimit = 3; //defauly to 3
 
 /*==============
 NAFIS DATA
