@@ -4,24 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--jQuery styleshseet for autofill-->
     <link
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
     />
+    <!--Bulma Stylsheet-->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
+    <!--Swiper JS stylesheet for article carousel-->
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
+    <!--Google Font stylesheets (Raleway and Kanit) for global fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -36,29 +41,79 @@
       rel="stylesheet"
     />
 
-    <!-- Nafis Ticker Experiment S-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">  
-    <!-- Nafis Ticker Experiment E-->
+    <!--Google Font Stylesheet (VT323) for Reddit API Ticker-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
 
+    <!--Local CSS Stylesheet-->
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>STKR- The lastest in market and financial news</title>
   </head>
   <body>
-    <header class="header">
-      <h1>STKR</h1>
-    </header>
+    <!--NavBar, courtesy Bulma.io-->
+    <nav class="navbar header" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" id="head" href="https://naf15.github.io/STKR/">
+          STKR
+        </a>
 
-    <!-- Nafis Ticker Experiment S-->
-    <img id='reddit-image' src="https://www.redditstatic.com/xray-snoo-head.png">
-    <div class="ticker-wrap">
-      <div class="ticker">
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
-    </div>
-<!-- Nafis Ticker Experiment E-->
 
-    
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="https://naf15.github.io/STKR/"> Home </a>
+
+          <a class="navbar-item" href="https://github.com/naf15/STKR">
+            GitHub Repository
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"> Resources </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="https://www.investopedia.com/">
+                Investopedia
+              </a>
+              <a class="navbar-item" href="https://www.nasdaq.com/"> Nasdaq </a>
+              <a
+                class="navbar-item"
+                href="https://www.spglobal.com/spdji/en/indices/equity/sp-500/#overview"
+              >
+                S&P Index
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--NavBar-->
+
+    <!--Reddit API Ticker-->
+    <img
+      id="reddit-image"
+      src="https://www.redditstatic.com/xray-snoo-head.png"
+    />
+    <div class="ticker-wrap">
+      <div class="ticker"></div>
+    </div>
+    <!--Reddit API Tikcker-->
+
+    <!--Input Form-->
     <aside>
       <form id="form">
         <input
@@ -70,89 +125,105 @@
         <button class="button is-medium button is-hovered">Submit</button>
       </form>
     </aside>
-    <div id="stocks-container" class="news-container">   <!-- change name to stocks container -->
+    <!--Input Form-->
 
-      <div id='stock-card-1'>
-        <div id='stock-info-card-1' class='info-card'></div>
-        <div id='stock-news-card-1' class="news-card">
-          <div class="swiper-container mySwiper">
-            <div class="swiper-wrapper">
-              <div id='slide-1-1' class="swiper-slide flex-d-column"></div>
-              <div id='slide-1-2' class="swiper-slide flex-d-column"></div>
-              <div id='slide-1-3' class="swiper-slide flex-d-column"></div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
+    <!--Card code provided by Bulma.io-->
+    <div class="card">
+      <div class="card-content">
+        <p class="title">
+          Search the NYSE stock symbol for the latest trade price and news
+          articles for your favorite publicly traded companies.
+        </p>
       </div>
-    
-      <div id='stock-card-2'>
-        <div id='stock-info-card-2' class='info-card'></div>
-        <div id='stock-news-card-2' class="news-card">
-          <div class="swiper-container mySwiper">
-            <div class="swiper-wrapper">
-              <div id='slide-2-1' class="swiper-slide flex-d-column"></div>
-              <div id='slide-2-2' class="swiper-slide flex-d-column"></div>
-              <div id='slide-2-3' class="swiper-slide flex-d-column"></div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </div>
-      <div id='stock-card-3'>
-        <div id='stock-info-card-3' class='info-card'></div>
-        <div id='stock-news-card-3' class="news-card">
-          <div class="swiper-container mySwiper">
-            <div class="swiper-wrapper">
-              <div id='slide-3-1' class="swiper-slide flex-d-column"></div>
-              <div id='slide-3-2' class="swiper-slide flex-d-column"></div>
-              <div id='slide-3-3' class="swiper-slide flex-d-column"></div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </div>
-      <div id='stock-card-4'>
-        <div id='stock-info-card-4' class='info-card'></div>
-        <div id='stock-news-card-4' class="news-card">
-          <div class="swiper-container mySwiper">
-            <div class="swiper-wrapper">
-              <div id='slide-4-1' class="swiper-slide flex-d-column"></div>
-              <div id='slide-4-2' class="swiper-slide flex-d-column"></div>
-              <div id='slide-4-3' class="swiper-slide flex-d-column"></div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </div>
-      <div id='stock-card-5'>
-        <div id='stock-info-card-5' class='info-card'></div>
-        <div id='stock-news-card-5' class="news-card">
-          <div class="swiper-container mySwiper">
-            <div class="swiper-wrapper">
-              <div id='slide-5-1' class="swiper-slide flex-d-column"></div>
-              <div id='slide-5-2' class="swiper-slide flex-d-column"></div>
-              <div id='slide-5-3' class="swiper-slide flex-d-column"></div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </div>
+    </div>
 
-    </div>  
+    <!--Stock and News Cards-->
+    <div class="bodyContent">
+      <div id="stocks-container" class="news-container">
+        <!-- change name to stocks container -->
+        <div id="stock-card-1">
+          <div id="stock-info-card-1" class="info-card"></div>
+          <div id="stock-news-card-1" class="news-card">
+            <div class="swiper-container mySwiper">
+              <div class="swiper-wrapper">
+                <div id="slide-1-1" class="swiper-slide flex-d-column"></div>
+                <div id="slide-1-2" class="swiper-slide flex-d-column"></div>
+                <div id="slide-1-3" class="swiper-slide flex-d-column"></div>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="stock-card-2">
+          <div id="stock-info-card-2" class="info-card"></div>
+          <div id="stock-news-card-2" class="news-card">
+            <div class="swiper-container mySwiper">
+              <div class="swiper-wrapper">
+                <div id="slide-2-1" class="swiper-slide flex-d-column"></div>
+                <div id="slide-2-2" class="swiper-slide flex-d-column"></div>
+                <div id="slide-2-3" class="swiper-slide flex-d-column"></div>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+        <div id="stock-card-3">
+          <div id="stock-info-card-3" class="info-card"></div>
+          <div id="stock-news-card-3" class="news-card">
+            <div class="swiper-container mySwiper">
+              <div class="swiper-wrapper">
+                <div id="slide-3-1" class="swiper-slide flex-d-column"></div>
+                <div id="slide-3-2" class="swiper-slide flex-d-column"></div>
+                <div id="slide-3-3" class="swiper-slide flex-d-column"></div>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+        <div id="stock-card-4">
+          <div id="stock-info-card-4" class="info-card"></div>
+          <div id="stock-news-card-4" class="news-card">
+            <div class="swiper-container mySwiper">
+              <div class="swiper-wrapper">
+                <div id="slide-4-1" class="swiper-slide flex-d-column"></div>
+                <div id="slide-4-2" class="swiper-slide flex-d-column"></div>
+                <div id="slide-4-3" class="swiper-slide flex-d-column"></div>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+        <div id="stock-card-5">
+          <div id="stock-info-card-5" class="info-card"></div>
+          <div id="stock-news-card-5" class="news-card">
+            <div class="swiper-container mySwiper">
+              <div class="swiper-wrapper">
+                <div id="slide-5-1" class="swiper-slide flex-d-column"></div>
+                <div id="slide-5-2" class="swiper-slide flex-d-column"></div>
+                <div id="slide-5-3" class="swiper-slide flex-d-column"></div>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Stock and News Cards-->
+
     <!-- logo gallery -->
     <h4>Made With:</h4>
-    <div class="columns madeWith">
+    <div class="columns is-desktop madeWith">
       <img
         class="column is-three-quarters-mobile is-one-quarter-desktop logo"
         src="images/redditLogo2.png"
@@ -165,6 +236,7 @@
       />
       <img
         class="column is-three-quarters-mobile is-one-quarter-desktop logo"
+        id="bulma"
         src="images/bulmaLogo2.png"
         alt="Bulma Logo"
       />
@@ -175,7 +247,7 @@
       />
     </div>
 
-    <!--Footer code provided by Bulma.io-->
+    <!--Footer code courtesy Bulma.io-->
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
