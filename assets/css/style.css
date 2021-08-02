@@ -322,7 +322,7 @@ footer p {
 }
 
 .logo {
-  height: 50%;
+  height: auto;
   width: 50%;
   margin-left: 10px;
   margin-top: 7px;
@@ -341,6 +341,12 @@ footer p {
 .input {
   margin: 5px;
   box-shadow: 5px 5px 5px lightgray;
+}
+
+#problem-child {
+  height: 200px;
+  width: 200px;
+  padding-left: 20px;
 }
 
 /* Media Queries =================================================================== */

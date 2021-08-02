@@ -9,9 +9,7 @@ var stockInputEl = $("#search");
 // swiper element
 var swiperContainer = $(".swiper-container");
 
-
 var tickerContainer = $(".ticker");
-
 
 var newsSlides = $(".swiper-slide");
 var numStockCardSlots = $(".news-card").length;
@@ -43,12 +41,10 @@ var swiper = new Swiper(".mySwiper", {
   keyboard: true,
 });
 
-
-var APIKey = "0fec86e191459990b6ae6e3c462bcc8d";
+var APIKey = "f4ffe18f8adcc3fc91a869983823de86";
 var newsURL = "";
 var stocksNewsData = [];
 var numberOfArticlesLimit = 3; //defauly to 3
-
 
 /*================
 FUNCTIONS
@@ -144,8 +140,6 @@ function getRedditPosts() {
     });
 }
 
-
-
 function getStockDataContent(stockSymbol, stockNum) {
   var profileURL = `https://financialmodelingprep.com/api/v3/profile/${stockSymbol}?apikey=${APIKey}`;
   fetch(profileURL)
@@ -240,7 +234,7 @@ function renderNewsCard(newsList, stockNum) {
     var stockNewsData = newsList[i];
     var newsImageUrl = stockNewsData.image;
     var stockNewsTitle = stockNewsData.title;
-    var stockNewsText = stockNewsData.text.slice(0,250) + "...";
+    var stockNewsText = stockNewsData.text.slice(0, 250) + "...";
 
     cardNewsTitle.text(stockNewsTitle);
     cardNewsText.text(stockNewsText);
@@ -279,12 +273,11 @@ function renderStockCards(favoriteStocks) {
     var currentStock = favoriteStocks[i];
     getStockNewsContent(numberOfArticlesLimit, currentStock, stockNum);
     getStockDataContent(currentStock, stockNum);
-    
   }
 }
 
 function resetStockCards(numStockSlots) {
-  for (var i=1; i <= numStockSlots; i++) {
+  for (var i = 1; i <= numStockSlots; i++) {
     $("#stock-card-" + i).show();
   }
 }
@@ -296,24 +289,24 @@ function removeEmptyStockCards(numStockCards, numStockSlots) {
 }
 
 function clearStockCards() {
-  for (var i=1; i<=savedStocks.length; i++) {
+  for (var i = 1; i <= savedStocks.length; i++) {
     var currentStockInfoCard = $(`#stock-info-card-${i}`);
-    
+
     currentStockInfoCard.children().each(function () {
       this.remove();
-    });  
+    });
     // removes stock-info-cards
-    
-    for (var j=1; j<=numberOfArticlesLimit; j++) {
+
+    for (var j = 1; j <= numberOfArticlesLimit; j++) {
       var currentStockNewsArticle = $(`#slide-${i}-${j}`);
       currentStockNewsArticle.children().each(function () {
-      this.remove();
-    });   
-    
-    // removes stock-news-card
-    };
-  };
-};
+        this.remove();
+      });
+
+      // removes stock-news-card
+    }
+  }
+}
 
 /*================
 USER INTERACTIONS
@@ -323,7 +316,6 @@ USER INTERACTIONS
 formEl.on("submit", function (event) {
   addFav(event); //API
 });
-
 
 /*==============
 INITIALIZATION
@@ -336,6 +328,3 @@ clearStockCards();
 resetStockCards(numStockCardSlots);
 renderStockCards(savedStocks);
 removeEmptyStockCards(savedStocks.length, numStockCardSlots);
-
-
-
