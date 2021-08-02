@@ -95,18 +95,6 @@ function addFav(event) {
         if (!savedStocks) {
           savedStocks = [];
         }
-<<<<<<< HEAD
-        if (!ba_favArr.includes(ba_stckSymb)) {
-          if (ba_favArr.length < 5) {
-            ba_favArr.push(ba_stckSymb);
-            ba_strFavArr = JSON.stringify(ba_favArr);
-            localStorage.setItem("SavedStocks", ba_strFavArr);
-          } else {
-            ba_favArr.push(ba_stckSymb);
-            ba_favArr.shift();
-            ba_strFavArr = JSON.stringify(ba_favArr);
-            localStorage.setItem("SavedStocks", ba_strFavArr);
-=======
         if (!savedStocks.includes(stckSymb)) {
           if (savedStocks.length < 5) {
             savedStocks.push(stckSymb);
@@ -117,7 +105,6 @@ function addFav(event) {
             savedStocks.shift();
             strFavArr = JSON.stringify(savedStocks);
             localStorage.setItem("SavedStocks", strFavArr);
->>>>>>> main
           }
         }
         
