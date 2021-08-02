@@ -270,6 +270,10 @@ form {
 }
 
 body {
+  background-image: url("../../images/white_wall_hash.png");
+  background-size: cover;
+  padding-bottom: 30px;
+  height: 550vh;
   background-color: whitesmoke;
 }
 
