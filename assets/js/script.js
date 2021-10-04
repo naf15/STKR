@@ -163,7 +163,7 @@ function getStockDataContent(stockSymbol, stockNum) {
 
 function renderInfoCard(stockInfo, stockNum) {
   var price = stockInfo.price;
-  var priceChange = stockInfo.change;
+  var priceChange =  Math.round(stockInfo.change * 100) / 100;
   var symbol = stockInfo.stockSymbol;
   var companyName = "(" + stockInfo.name + ")";
   var stockInfoContainer = $("#stock-info-card-" + stockNum);
