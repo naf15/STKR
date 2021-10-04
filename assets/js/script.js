@@ -41,10 +41,10 @@ var swiper = new Swiper(".mySwiper", {
   keyboard: true,
 });
 
-var APIKey = "f4ffe18f8adcc3fc91a869983823de86";
+var APIKey = "876f087bfdde120e2a5b84d29289c45b";
 var newsURL = "";
 var stocksNewsData = [];
-var numberOfArticlesLimit = 3; //defauly to 3
+var numberOfArticlesLimit = 3; //default to 3
 
 /*================
 FUNCTIONS
