@@ -41,7 +41,7 @@ var swiper = new Swiper(".mySwiper", {
   keyboard: true,
 });
 
-var APIKey = "876f087bfdde120e2a5b84d29289c45b";
+var APIKey = "4e48677e67d7cfd40210605712bdb9a0";
 var newsURL = "";
 var stocksNewsData = [];
 var numberOfArticlesLimit = 3; //default to 3
